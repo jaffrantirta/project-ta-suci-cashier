@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('item', ItemController::class);
 Route::apiResource('transaction', TransactionController::class);
 Route::apiResource('transactiondetail', TransactionDetailController::class);
+Route::apiResource('itemstock', ItemStockController::class);

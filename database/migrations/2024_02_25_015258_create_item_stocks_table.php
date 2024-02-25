@@ -10,12 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('item_stocks', function (Blueprint $table) {
             $table->id();
-            $table->string('sku')->unique();
-            $table->string('name');
-            $table->float('price');
+            $table->bigInteger('item_id')->unsigned();
+            $table->integer('amount');
             $table->timestamps();
+            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('item_stocks');
     }
 };
