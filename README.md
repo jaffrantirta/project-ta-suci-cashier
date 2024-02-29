@@ -22,7 +22,7 @@ https://github.com/jaffrantirta/project-ta-suci-cashier.git
 4. dan `paste` di vs code itu dan enter
 5. lalu pilih lokasi project dan selesaikan prosesnya dan buat database di mysql dengan nama `ta_suci_cashier`
 6. kemudian setelah semua sudah selesai, buka peoject nya
-7. lalu tekan `ctr;` + `shift` + `~` agar terbuka `terminal``
+7. lalu tekan `ctr` + `shift` + `~` agar terbuka `terminal``
 8. lalu pada terminal ketik
 
 ```

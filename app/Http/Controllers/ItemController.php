@@ -6,12 +6,15 @@ use App\Http\Requests\ItemStoreRequest;
 use App\Http\Requests\ItemUpdateRequest;
 use App\Models\Item;
 use App\Queries\ItemQuery;
+use Inertia\Inertia;
 
 class ItemController extends Controller
 {
     public function index(ItemQuery $itemQuery)
     {
-        return $itemQuery->includes()->filterSortPaginateWithAppend();
+        return Inertia::render('Item/index', [
+            'items' => $itemQuery->includes()->filterSortPaginateWithAppend()
+        ]);
     }
 
     public function store(ItemStoreRequest $request)
