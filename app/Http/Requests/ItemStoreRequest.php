@@ -15,7 +15,9 @@ class ItemStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'min:3'],
+            'sku' => ['required', 'min:5', 'unique:items,sku,except,id'],
+            'price' => ['required', 'min:3', 'numeric']
         ];
     }
 }

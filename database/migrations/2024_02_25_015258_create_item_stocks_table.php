@@ -13,7 +13,8 @@ return new class extends Migration {
         Schema::create('item_stocks', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('item_id')->unsigned();
-            $table->integer('amount');
+            $table->integer('change_amount')->comment('Positive values for additions, negative values for reductions');
+            $table->integer('amount')->comment('The result amount that already changed');
             $table->timestamps();
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
         });

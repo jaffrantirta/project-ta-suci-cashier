@@ -13,6 +13,5 @@ class Item extends Model
         'sku',
         'name',
         'price',
-        'stock'
     ];
 }

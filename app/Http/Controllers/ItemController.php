@@ -12,15 +12,20 @@ class ItemController extends Controller
 {
     public function index(ItemQuery $itemQuery)
     {
-        return view('item');
-        return Inertia::render('Item/index', [
+        return view('item/item', [
             'items' => $itemQuery->includes()->filterSortPaginateWithAppend()
         ]);
     }
 
+    public function create()
+    {
+        return view('item/create');
+    }
+
     public function store(ItemStoreRequest $request)
     {
-        return Item::create($request->validated());
+        Item::create($request->validated());
+        return redirect('item');
     }
 
     public function show($item, ItemQuery $query)
@@ -31,7 +36,7 @@ class ItemController extends Controller
     public function update(ItemUpdateRequest $request, Item $item)
     {
         $item->update($request->validated());
-        return $item;
+        return redirect('item');
     }
 
     public function destroy(Item $item)

@@ -17,7 +17,9 @@ class ItemFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $faker->name(),
+            'sku' => $faker->unique()->randomNumber(),
+            'price' => $faker->randomNumber(2),
         ];
     }
 }

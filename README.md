@@ -42,10 +42,10 @@ php artisan migrate
 10. kemudian setting role/jabatan seperti owner, cashier dan operation dengan cara jalankan
 
 ```
-php artisan persiapan
+php artisan persiapan-sistem
 ```
 
-11. lanjut sinkronasi hak akses role/jabatan
+11. lanjut sinkronasi hak akses role/jabatan (jika command dibawah error coba ulangi command diatas dan coba lagi command di bawah)
 
 ```
 php artisan peddos-permission-role:sync
