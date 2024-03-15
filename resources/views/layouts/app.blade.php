@@ -81,15 +81,40 @@
                 <!-- Sidebar -->
                 <div class="col-md-3 sidebar mt-4">
                     <ul class="nav flex-column gap-1">
-                        <li class="nav-item bg-primary rounded">
-                            <a class="nav-link text-light" href="#">Sidebar Item 1</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark border rounded {{ Route::currentRouteName() === 'home' ? 'bg-primary' : '' }}" href="{{ route('home') }}">Dashboard</a>
                         </li>
-                        <li class="nav-item bg-light border rounded">
-                            <a class="nav-link text-dark" href="#">Sidebar Item 2</a>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark border rounded {{ Route::currentRouteName() === 'transaction.index' ? 'bg-primary' : '' }}" href="{{ route('transaction.index') }}">Transaksi</a>
                         </li>
-                        <!-- Add more sidebar items as needed -->
+                        <li class="nav-item bg-light border rounded" id="stok-menu">
+                            <a class="nav-link text-dark border rounded {{ Route::currentRouteName() === 'stock.index' ? 'bg-primary' : '' }}" href="#" onclick="toggleSubMenu('stok-submenu')">Stok</a>
+                            <ul class="nav flex-column gap-1 pl-3" id="stok-submenu" style="display: none;">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark border rounded {{ Route::currentRouteName() === 'stock.index' ? 'bg-primary' : '' }}" href="{{ route('stock.index') }}">Stok Masuk</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark border rounded {{ Route::currentRouteName() === 'stock.index' ? 'bg-primary' : '' }}" href="{{ route('stock.index') }}">Stok Keluar</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark border rounded {{ Route::currentRouteName() === 'item.index' ? 'bg-primary' : '' }}" href="{{ route('item.index') }}">Barang</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark border rounded {{ Route::currentRouteName() === 'report.index' ? 'bg-primary' : '' }}" href="{{ route('report.index') }}">Laporan</a>
+                        </li>
                     </ul>
                 </div>
+                
+                
+                <script>
+                    function toggleSubMenu(submenuId) {
+                        const submenu = document.getElementById(submenuId);
+                        submenu.style.display = submenu.style.display === 'none' ? 'block' : 'none';
+                    }
+                </script>
+                
                 
                 <!-- Main Content -->
                 <div class="col-md-9">

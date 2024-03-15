@@ -12,6 +12,7 @@ class ItemController extends Controller
 {
     public function index(ItemQuery $itemQuery)
     {
+        return view('item');
         return Inertia::render('Item/index', [
             'items' => $itemQuery->includes()->filterSortPaginateWithAppend()
         ]);
