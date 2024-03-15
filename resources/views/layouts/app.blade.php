@@ -13,6 +13,9 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -30,7 +33,8 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        <!-- Your left side of the navbar here -->
+                        <!-- Note: We are not using this section for the sidebar anymore -->
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -72,9 +76,29 @@
             </div>
         </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Sidebar -->
+                <div class="col-md-3 sidebar mt-4">
+                    <ul class="nav flex-column gap-1">
+                        <li class="nav-item bg-primary rounded">
+                            <a class="nav-link text-light" href="#">Sidebar Item 1</a>
+                        </li>
+                        <li class="nav-item bg-light border rounded">
+                            <a class="nav-link text-dark" href="#">Sidebar Item 2</a>
+                        </li>
+                        <!-- Add more sidebar items as needed -->
+                    </ul>
+                </div>
+                
+                <!-- Main Content -->
+                <div class="col-md-9">
+                    <main class="py-4">
+                        @yield('content')
+                    </main>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
