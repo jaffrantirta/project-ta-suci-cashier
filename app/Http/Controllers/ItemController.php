@@ -25,18 +25,20 @@ class ItemController extends Controller
     public function store(ItemStoreRequest $request)
     {
         Item::create($request->validated());
-        return redirect('item');
+        return redirect('item')->with('success', 'Item created successfully.');
     }
 
     public function show($item, ItemQuery $query)
     {
-        return $query->includes()->findAndAppend($item);
+        return view('item/create', [
+            'item' => $query->includes()->findAndAppend($item)
+        ]);
     }
 
     public function update(ItemUpdateRequest $request, Item $item)
     {
         $item->update($request->validated());
-        return redirect('item');
+        return redirect('item')->with('success', 'Item updated successfully');
     }
 
     public function destroy(Item $item)

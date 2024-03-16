@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="position: fixed; width: 100%; z-index: 1000;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -79,7 +79,7 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- Sidebar -->
-                <div class="col-md-3 sidebar mt-4">
+                <div class="col-md-3 sidebar mt-4" style="position: fixed; height: 100%; overflow-y: auto; padding-top: 80px; padding-left: 15px;">
                     <ul class="nav flex-column gap-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark border rounded {{ Route::currentRouteName() === 'home' ? 'bg-primary' : '' }}" href="{{ route('home') }}">Dashboard</a>
@@ -117,7 +117,7 @@
                 
                 
                 <!-- Main Content -->
-                <div class="col-md-9">
+                <div class="col-md-9 offset-md-3" style="padding-top: 80px; padding-left: 15px;">
                     <main class="py-4">
                         @yield('content')
                     </main>
