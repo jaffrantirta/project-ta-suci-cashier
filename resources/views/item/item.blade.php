@@ -44,11 +44,11 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $items->links() }}
                 </div>
-                
             </div>
         </div>
     </div>
 </div>
+<script>
+</script>
 @endsection
