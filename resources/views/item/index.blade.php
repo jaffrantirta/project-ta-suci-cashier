@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-11">
             @if(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <form action="{{ route('item.index') }}" method="GET" class="mb-3">
                         <div class="input-group">
-                            <input type="text" id="searchInput" class="form-control" placeholder="Search by name..." name="filter[name]">
+                            <input type="search" id="searchInput" class="form-control" placeholder="Search by name..." name="filter[name]">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </div>
@@ -38,7 +38,8 @@
                                     <td>{{ $item->name }}</td>
                                     <td>Rp{{ number_format($item->price) }}</td>
                                     <td>
-                                        <a href="{{ route('item.show', ['item' => $item->id]) }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ route('item.show', ['item' => $item->id]) }}" class="btn btn-primary">Detail</a>
+                                        <a href="{{ route('item.edit', ['item' => $item->id]) }}" class="btn btn-primary">Edit</a>
                                     </td>
                                 </tr>
                             @endforeach

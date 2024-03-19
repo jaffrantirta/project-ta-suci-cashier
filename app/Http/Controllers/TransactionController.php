@@ -11,7 +11,7 @@ class TransactionController extends Controller
 {
     public function index(TransactionQuery $transactionQuery)
     {
-        return view('transaction/transaction');
+        return view('transaction/index');
         return $transactionQuery->includes()->filterSortPaginateWithAppend();
     }
 

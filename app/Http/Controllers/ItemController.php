@@ -12,7 +12,7 @@ class ItemController extends Controller
 {
     public function index(ItemQuery $itemQuery)
     {
-        return view('item/item', [
+        return view('item/index', [
             'items' => $itemQuery->includes()->filterSortPaginateWithAppend()
         ]);
     }
@@ -29,6 +29,13 @@ class ItemController extends Controller
     }
 
     public function show($item, ItemQuery $query)
+    {
+        return view('item/create', [
+            'item' => $query->includes()->findAndAppend($item)
+        ]);
+    }
+
+    public function edit($item, ItemQuery $query)
     {
         return view('item/create', [
             'item' => $query->includes()->findAndAppend($item)
