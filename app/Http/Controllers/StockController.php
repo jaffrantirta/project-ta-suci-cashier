@@ -16,6 +16,11 @@ class StockController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        return view('stock/create');
+    }
+
     public function store(StockStoreRequest $request)
     {
         return Stock::create($request->validated());
