@@ -2,24 +2,24 @@
 
 namespace App\Queries;
 
-use App\Models\ItemStock;
+use App\Models\Stock;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedInclude;
 use Spatie\QueryBuilder\AllowedSort;
 use Dwikipeddos\PeddosLaravelTools\Queries\PaginatedQuery;
 
-class ItemStockQuery extends PaginatedQuery
+class StockQuery extends PaginatedQuery
 {
     public function __construct()
     {
-        parent::__construct(ItemStock::query());
+        parent::__construct(Stock::query());
     }
 
     protected array $append = [
        //'phone',
     ];
 
-    protected string $adminPermission = 'itemstock.view-sensitive-data';
+    protected string $adminPermission = 'stock.view-sensitive-data';
 
     protected function getAllowedSorts(): array
     {

@@ -2,64 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Item;
-use Illuminate\Http\Request;
+use App\Http\Requests\StockStoreRequest;
+use App\Http\Requests\StockUpdateRequest;
+use App\Models\Stock;
+use App\Queries\StockQuery;
 
 class StockController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(StockQuery $stockQuery)
     {
-        return view('stock/index');
+        return view('stock/index', [
+            'stocks' => $stockQuery->includes()->filterSortPaginateWithAppend()
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(StockStoreRequest $request)
     {
-        //
+        return Stock::create($request->validated());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function show($stock, StockQuery $query)
     {
-        //
+        return $query->includes()->findAndAppend($stock);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Item $item)
+    public function update(StockUpdateRequest $request, Stock $stock)
     {
-        //
+        $stock->update($request->validated());
+        return $stock;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Item $item)
+    public function destroy(Stock $stock)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Item $item)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Item $item)
-    {
-        //
+        $stock->delete();
+        return response()->noContent();
     }
 }

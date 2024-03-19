@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('item_stocks', function (Blueprint $table) {
+        Schema::create('stocks', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('item_id')->unsigned();
             $table->integer('change_amount')->comment('Positive values for additions, negative values for reductions');
@@ -25,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('item_stocks');
+        Schema::dropIfExists('stocks');
     }
 };

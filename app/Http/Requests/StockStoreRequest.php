@@ -2,14 +2,14 @@
 
 namespace App\Http\Requests;
 
-use App\Models\ItemStock;
+use App\Models\Stock;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ItemStockUpdateRequest extends FormRequest
+class StockStoreRequest extends FormRequest
 {
     public function authorize()
     {
-        return $this->user()->can('update', $this->route('itemstock'));
+        return $this->user()->can('create', Stock::class);
     }
 
     public function rules()
