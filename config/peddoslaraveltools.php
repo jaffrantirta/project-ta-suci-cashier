@@ -22,6 +22,27 @@ return [
             'name' => 'item.delete',
             'roles' => ['owner']
         ],
+        // stock
+        [
+            'name' => 'stock.create',
+            'roles' => ['owner', 'operation']
+        ],
+        [
+            'name' => 'stock.update',
+            'roles' => ['owner', 'operation']
+        ],
+        [
+            'name' => 'stock.view',
+            'roles' => ['owner', 'operation', 'cashier']
+        ],
+        [
+            'name' => 'stock.viewAny',
+            'roles' => ['owner', 'operation', 'cashier']
+        ],
+        [
+            'name' => 'stock.delete',
+            'roles' => ['owner']
+        ],
         // transaction
         [
             'name' => 'transaction.create',

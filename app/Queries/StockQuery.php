@@ -3,10 +3,10 @@
 namespace App\Queries;
 
 use App\Models\Stock;
+use Dwikipeddos\PeddosLaravelTools\Queries\PaginatedQuery;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedInclude;
 use Spatie\QueryBuilder\AllowedSort;
-use Dwikipeddos\PeddosLaravelTools\Queries\PaginatedQuery;
 
 class StockQuery extends PaginatedQuery
 {
@@ -16,7 +16,7 @@ class StockQuery extends PaginatedQuery
     }
 
     protected array $append = [
-       //'phone',
+        // 'phone',
     ];
 
     protected string $adminPermission = 'stock.view-sensitive-data';
@@ -24,21 +24,23 @@ class StockQuery extends PaginatedQuery
     protected function getAllowedSorts(): array
     {
         return [
-            //AllowedSort::field('created_at'),
+            AllowedSort::field('created_at'),
         ];
     }
 
     protected function getAllowedFilters(): array
     {
         return [
-            //AllowedFilter::partial('name'),
+            AllowedFilter::partial('item_id'),
+            AllowedFilter::partial('change_amount'),
+            AllowedFilter::partial('amount'),
         ];
     }
 
     protected function getAllowedIncludes(): array
     {
         return [
-            //AllowedInclude::relationship('user'),
+            AllowedInclude::relationship('item'),
         ];
     }
 }

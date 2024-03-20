@@ -35,13 +35,11 @@
                             @foreach($stocks as $key => $stock)
                                 <tr>
                                     <td>{{ $key+1 }}</td>
-                                    <td>{{ $stock->sku }}</td>
-                                    <td>{{ $stock->name }}</td>
-                                    <td>Rp{{ number_format($stock->price) }}</td>
-                                    <td>
-                                        <a href="{{ route('stock.show', ['stock' => $stock->id]) }}" class="btn btn-primary">Detail</a>
-                                        <a href="{{ route('stock.edit', ['stock' => $stock->id]) }}" class="btn btn-primary">Edit</a>
-                                    </td>
+                                    <td>{{ $stock->created_at }}</td>
+                                    <td>{{ $stock->item->sku }}</td>
+                                    <td>{{ $stock->item->name }}</td>
+                                    <td>{{ $stock->change_amount }}</td>
+                                    <td>{{ $stock->amount }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
