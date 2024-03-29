@@ -15,7 +15,12 @@ class TransactionStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'number' => ['forbidden'],
+            'user_id' => ['forbidden'],
+            'total_of_item' => ['forbidden'],
+            'total_of_amount' => ['forbidden'],
+            'address' => ['nullable'],
+            'payment_method' => ['forbidden'],
         ];
     }
 }

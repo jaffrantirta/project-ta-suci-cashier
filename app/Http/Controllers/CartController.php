@@ -3,23 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\Stock;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function __construct()
-    {
-        // dd();
-        // \Cart::session(auth()->user()->id);
-    }
-
-    public function index()
-    {
-        return 'hola';
-        // $item = Item::where('sku', $sku);
-        // \Cart::add($item->id, $item->name, $item->price, 1, array());
-    }
-
     public function store(Request $request)
     {
         $item = Item::where('sku', $request->sku)->first();
@@ -28,8 +16,18 @@ class CartController extends Controller
             return redirect()->back()->with('error', 'Barang tidak ada');
         }
 
+        $stock = Stock::where('item_id', $item->id)->latest()->first();
+
+        if (!$stock) {
+            return redirect()->back()->with('error', 'Stok belum dimasukan');
+        }
+
+        if ($stock->amount < 1) {
+            return redirect()->back()->with('error', 'Stok barang habis');
+        }
+
         \Cart::add($item->id, $item->name, $item->price, 1, []);
 
-        return redirect()->back()->with('success', 'Item added to cart successfully');
+        return redirect()->back();
     }
 }

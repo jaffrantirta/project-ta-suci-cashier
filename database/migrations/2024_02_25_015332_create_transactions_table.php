@@ -13,13 +13,13 @@ return new class extends Migration {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->string('number')->unique();
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('issued_by')->unsigned();
             $table->integer('total_of_item');
-            $table->float('total_of_amount');
-            $table->string('address')->nullable();
+            $table->double('total_of_amount');
             $table->string('payment_method');
+            $table->jsonb('attributes')->nullable();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('issued_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

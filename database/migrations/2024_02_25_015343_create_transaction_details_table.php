@@ -15,9 +15,9 @@ return new class extends Migration {
             $table->bigInteger('transaction_id')->unsigned();
             $table->bigInteger('item_id')->unsigned();
             $table->string('item_name');
-            $table->float('item_price');
+            $table->double('item_price');
             $table->integer('amount');
-            $table->float('total');
+            $table->double('total');
             $table->timestamps();
             $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');

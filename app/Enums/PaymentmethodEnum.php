@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum Paymentmethod: int
+enum PaymentMethod: int
 {
     case CASH = 1;
 

@@ -14,9 +14,19 @@ class TransactionDetailController extends Controller
         return $transactiondetailQuery->includes()->filterSortPaginateWithAppend();
     }
 
-    public function store(TransactionDetailStoreRequest $request)
+    public function store($transaction_id)
     {
-        return TransactionDetail::create($request->validated());
+        $cart = \Cart::getContent();
+        foreach ($cart as $item) {
+            TransactionDetail::create(array([
+                'transaction_id' => $transaction_id,
+                'item_id' => $item->id,
+                'item_name' => $item->name,
+                'item_price' => $item->price,
+                'amount' => $item->quantity,
+                'total' => $item->getPriceSum()
+            ]));
+        }
     }
 
     public function show($transactiondetail, TransactionDetailQuery $query)

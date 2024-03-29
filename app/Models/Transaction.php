@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\PaymentMethod;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use \Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,12 +14,16 @@ class Transaction extends Model
 
     protected $fillable = [
         'number',
-        'user_id',
+        'issued_by',
         'total_of_item',
         'total_of_amount',
-        'address',
-        'payent_method'
+        'payment_method',
+        'attributes'
     ];
+
+    // protected $casts = [
+    //     'payment_method' => PaymentMethod::class,
+    // ];
 
     public function user(): BelongsTo
     {

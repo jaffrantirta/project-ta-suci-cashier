@@ -12,21 +12,20 @@
                 <div class="card-body">
                     <form action="{{ route('cart.store') }}" method="POST">
                         @csrf
-                <div class="row mb-3">
-                    <div class="col-md-12">
-                        <!-- Item name -->
-                        <div class="form-group">
-                            <label for="item_name">Kode Barang (SKU)</label>
-                            <input type="text" class="form-control" id="sku" name="sku" required>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <!-- Item name -->
+                                <div class="form-group">
+                                    <label for="item_name">Kode Barang (SKU)</label>
+                                    <input type="text" class="form-control" id="sku" name="sku" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-1">
+                                <button type="submit" class="btn btn-primary">Tambah</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-12 mt-1">
-                        <button type="submit" class="btn btn-primary">Tambah</button>
-                        <button type="button" class="btn btn-secondary">Cek</button>
-                    </div>
-                </div>
                     </form>
-            </div>
+                </div>
             </div>
             <div class="card mt-5">
                 <div class="card-header">Transaksi</div>
@@ -35,13 +34,25 @@
                     <!-- Form to add new item to cart -->
                     <form action="{{ route('transaction.store') }}" method="POST">
                         @csrf
-                        <!-- Submit button -->
                         <div class="row">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="customer_name">Nama Pelanggan</label>
+                                            <input type="text" class="form-control" id="customer_name" name="customer_name" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="customer_address">Alamat Pelanggan</label>
+                                            <input type="text" class="form-control" id="customer_address" name="customer_address" required>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </form>
+                    
 
                     <!-- Table list cart -->
                     <div class="table-responsive mt-3">
@@ -71,9 +82,16 @@
                     <!-- Grand total price -->
                     <div class="row mt-3">
                         <div class="col-md-12">
-                            <h5>Grand Total: Rp{{number_format($sub_total)}}</h5>
+                            <h5>Jumlah Total: Rp{{number_format($sub_total)}}</h5>
                         </div>
                     </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+
+                </form>
                 </div>
             </div>
         </div>
