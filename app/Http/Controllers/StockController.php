@@ -12,7 +12,6 @@ class StockController extends Controller
 {
     public function index(StockQuery $stockQuery)
     {
-        // dd(Stock::all());
         return view('stock/index', [
             'stocks' => $stockQuery->includes()->filterSortPaginateWithAppend()
         ]);

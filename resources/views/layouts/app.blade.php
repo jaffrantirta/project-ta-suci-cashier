@@ -91,10 +91,17 @@
                             <a class="nav-link text-dark border rounded {{ Route::currentRouteName() === 'stock.index' ? 'bg-primary' : '' }}" href="#" onclick="toggleSubMenu('stok-submenu')">Stok</a>
                             <ul class="nav flex-column gap-1 pl-3" id="stok-submenu" style="display: none;">
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark border rounded {{ Route::currentRouteName() === 'stock.index' ? 'bg-primary' : '' }}" href="{{ route('stock.index') }}">Stok Masuk</a>
+                                    <a class="nav-link text-dark border rounded {{ request()->input('filter.type') === '>' ? 'bg-primary' : '' }}"
+                                        href="{{ route('stock.index', ['filter[type]' => '>']) }}">
+                                        Stok Masuk
+                                     </a>
+                                     
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark border rounded {{ Route::currentRouteName() === 'stock.index' ? 'bg-primary' : '' }}" href="{{ route('stock.index') }}">Stok Keluar</a>
+                                    <a class="nav-link text-dark border rounded {{ request()->input('filter.type') === '<' ? 'bg-primary' : '' }}"
+                                        href="{{ route('stock.index', ['filter[type]' => '<']) }}">
+                                        Stok Keluar
+                                     </a>
                                 </li>
                             </ul>
                         </li>

@@ -33,7 +33,11 @@ class StockQuery extends PaginatedQuery
         return [
             AllowedFilter::partial('item_id'),
             AllowedFilter::partial('change_amount'),
+            AllowedFilter::callback('type', function ($query, $value) {
+                $query->where('change_amount', $value, 0);
+            }),
             AllowedFilter::partial('amount'),
+            AllowedFilter::partial('item.name'),
         ];
     }
 

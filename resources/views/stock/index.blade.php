@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <form action="{{ route('stock.index') }}" method="GET" class="mb-3">
                         <div class="input-group">
-                            <input type="search" id="searchInput" class="form-control" placeholder="Search by name..." name="filter[name]">
+                            <input type="search" id="searchInput" class="form-control" placeholder="Cari berdasarkan nama barang..." name="filter[item.name]">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </div>
