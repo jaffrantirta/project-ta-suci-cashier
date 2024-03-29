@@ -38,8 +38,16 @@
                                     <td>{{ $stock->created_at }}</td>
                                     <td>{{ $stock->item->sku }}</td>
                                     <td>{{ $stock->item->name }}</td>
-                                    <td>{{ $stock->change_amount }}</td>
-                                    <td>{{ $stock->amount }}</td>
+                                    <td class="{{ $stock->change_amount > 0 ? 'text-success' : ($stock->change_amount < 0 ? 'text-danger' : '') }}">
+                                        {{ $stock->change_amount }}
+                                    </td>
+                                    <td>
+                                        @if ($stock->change_amount > 0)
+                                            Stok Masuk
+                                        @elseif ($stock->change_amount < 0)
+                                            Stok Berkurang
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
