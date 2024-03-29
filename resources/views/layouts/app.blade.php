@@ -87,6 +87,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark border rounded {{ Route::currentRouteName() === 'transaction.index' ? 'bg-primary' : '' }}" href="{{ route('transaction.index') }}">Transaksi</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark border rounded {{ Route::currentRouteName() === 'transaction.create' ? 'bg-primary' : '' }}" href="{{ route('transaction.create') }}">Tambah Transaksi Baru</a>
+                        </li>
                         <li class="nav-item bg-light border rounded" id="stok-menu">
                             <a class="nav-link text-dark border rounded {{ Route::currentRouteName() === 'stock.index' ? 'bg-primary' : '' }}" href="#" onclick="toggleSubMenu('stok-submenu')">Stok</a>
                             <ul class="nav flex-column gap-1 pl-3" id="stok-submenu" style="display: none;">

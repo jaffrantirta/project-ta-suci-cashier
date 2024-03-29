@@ -5,14 +5,24 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TransactionStoreRequest;
 use App\Http\Requests\TransactionUpdateRequest;
 use App\Models\Transaction;
+use App\Queries\ItemQuery;
 use App\Queries\TransactionQuery;
 
 class TransactionController extends Controller
 {
     public function index(TransactionQuery $transactionQuery)
     {
-        return view('transaction/index');
-        return $transactionQuery->includes()->filterSortPaginateWithAppend();
+        return view('transaction/index', [
+            'transactions' => $transactionQuery->includes()->filterSortPaginateWithAppend()
+        ]);
+    }
+
+    public function create()
+    {
+        return view('transaction/create', [
+            'cart' => \Cart::getContent(),
+            'sub_total' => \Cart::getSubTotal()
+        ]);
     }
 
     public function store(TransactionStoreRequest $request)

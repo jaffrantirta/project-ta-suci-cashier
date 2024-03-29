@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
@@ -32,3 +33,4 @@ Route::resource('transaction', TransactionController::class);
 Route::resource('stock', StockController::class);
 Route::resource('item', ItemController::class);
 Route::resource('report', ReportController::class);
+Route::resource('cart', CartController::class);
