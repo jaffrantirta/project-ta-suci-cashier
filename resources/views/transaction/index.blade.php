@@ -4,79 +4,46 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
+            @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
             <div class="card">
                 <div class="card-header">Transaksi</div>
-
+                
                 <div class="card-body">
-                    <!-- Form to add new item to cart -->
-                    <form action="{{ route('transaction.index') }}" method="POST">
-                        @csrf
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <!-- Item name -->
-                                <div class="form-group">
-                                    <label for="item_name">Item Name</label>
-                                    <input type="text" class="form-control" id="item_name" name="item_name" required>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <!-- Price -->
-                                <div class="form-group">
-                                    <label for="price">Price</label>
-                                    <input type="number" class="form-control" id="price" name="price" required>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <!-- Quantity -->
-                                <div class="form-group">
-                                    <label for="quantity">Quantity</label>
-                                    <input type="number" class="form-control" id="quantity" name="quantity" required>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Submit button -->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary">Add to Cart</button>
+                    <form action="{{ route('transaction.index') }}" method="GET" class="mb-3">
+                        <div class="input-group">
+                            <input type="search" id="searchInput" class="form-control" placeholder="Cari berdasarkan kode nota..." name="filter[number]">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary">Search</button>
                             </div>
                         </div>
                     </form>
-
-                    <!-- Table list cart -->
-                    <div class="table-responsive mt-3">
-                        <table class="table">
-                            <thead>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Tanggal</th>
+                                <th>Kode Transaksi</th>
+                                <th>Jumlah Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($transactions as $key => $transaction)
                                 <tr>
-                                    <th>Item</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                    <!-- Add more headers if needed -->
+                                    <td>{{ $key+1 }}</td>
+                                    <td>{{ $transaction->created_at }}</td>
+                                    <td>{{ $transaction->number }}</td>
+                                    <td>Rp{{ number_format($transaction->total_of_amount) }}</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Loop through cart items and display -->
-                                <tr>
-                                    <td>Item Name</td>
-                                    <td>$10</td>
-                                    <td>2</td>
-                                    <td>$20</td>
-                                    <!-- Add more columns for other details if needed -->
-                                </tr>
-                                <!-- Repeat this row for each item in the cart -->
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Grand total price -->
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <h5>Grand Total: $100</h5>
-                        </div>
-                    </div>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+</script>
 @endsection
