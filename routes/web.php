@@ -34,3 +34,8 @@ Route::resource('stock', StockController::class);
 Route::resource('item', ItemController::class);
 Route::resource('report', ReportController::class);
 Route::resource('cart', CartController::class);
+
+
+Route::get('/transaction/{transaction}/receipt', [TransactionController::class, 'receipt'])
+    ->name('transaction.receipt');
+

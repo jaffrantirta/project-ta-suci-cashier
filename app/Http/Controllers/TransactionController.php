@@ -65,7 +65,14 @@ class TransactionController extends Controller
         }
         DB::commit();
         \Cart::clear();
-        return redirect()->back()->with('success', 'Tranaksi berhasil disimpan');
+        return redirect()->route('transaction.receipt', ['transaction' => $transaction, 'include[]' => 'transaction_details']);
+    }
+
+    public function receipt($transaction, TransactionQuery $query)
+    {
+        return view('transaction/receipt', [
+            'transaction' => $query->includes()->findAndAppend($transaction)
+        ]);
     }
 
     public function show($transaction, TransactionQuery $query)
