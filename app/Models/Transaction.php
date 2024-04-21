@@ -25,6 +25,25 @@ class Transaction extends Model
     //     'payment_method' => PaymentMethod::class,
     // ];
 
+
+    protected $appends = [
+        'customer_name',
+        'customer_address'
+    ];
+
+    public function getCustomerNameAttribute()
+    {
+        $attributes = json_decode($this->attributes['attributes'], true);
+        return $attributes['customer_name'] ?? null;
+    }
+
+    public function getCustomerAddressAttribute()
+    {
+        $attributes = json_decode($this->attributes['attributes'], true);
+        return $attributes['customer_address'] ?? null;
+    }
+
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

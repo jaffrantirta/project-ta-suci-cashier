@@ -70,7 +70,9 @@ class TransactionController extends Controller
 
     public function show($transaction, TransactionQuery $query)
     {
-        return $query->includes()->findAndAppend($transaction);
+        return view('transaction/show', [
+            'transaction' => $query->includes()->findAndAppend($transaction)
+        ]);
     }
 
     public function update(TransactionUpdateRequest $request, Transaction $transaction)

@@ -9,7 +9,7 @@
             @endif
             <div class="card">
                 <div class="card-header">Transaksi</div>
-                
+
                 <div class="card-body">
                     <form action="{{ route('transaction.index') }}" method="GET" class="mb-3">
                         <div class="input-group">
@@ -23,18 +23,23 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Tanggal</th>
                                 <th>Kode Transaksi</th>
                                 <th>Jumlah Total</th>
+                            <th>Tanggal</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($transactions as $key => $transaction)
                                 <tr>
                                     <td>{{ $key+1 }}</td>
-                                    <td>{{ $transaction->created_at }}</td>
-                                    <td>{{ $transaction->number }}</td>
+                                    <td>
+                                        <a href="{{ route('transaction.show', ['transaction' => $transaction->id, 'include[]' => 'transaction_details']) }}">
+                                            {{ $transaction->number }}
+                                        </a>
+                                    </td>
+
                                     <td>Rp{{ number_format($transaction->total_of_amount) }}</td>
+                                    <td>{{ $transaction->created_at }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
