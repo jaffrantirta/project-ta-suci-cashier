@@ -26,6 +26,7 @@ class Stock extends Model
         $exists = static::where('item_id', $this->item_id)->exists();
         if ($exists) {
             $sum = static::where('item_id', $this->item_id)->sum('change_amount');
+            // dd($sum, $this->change_amount);
             return $sum + $this->change_amount;
         } else {
             return $this->change_amount;

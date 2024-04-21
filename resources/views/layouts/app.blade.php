@@ -95,14 +95,14 @@
                             <ul class="nav flex-column gap-1 pl-3" id="stok-submenu" style="display: none;">
                                 <li class="nav-item">
                                     <a class="nav-link text-dark border rounded {{ request()->input('filter.type') === '>' ? 'bg-primary' : '' }}"
-                                        href="{{ route('stock.index', ['filter[type]' => '>']) }}">
+                                        href="{{ route('stock.index', ['filter[type]' => '>', 'sort' => '-created_at']) }}">
                                         Stok Masuk
                                      </a>
-                                     
+
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark border rounded {{ request()->input('filter.type') === '<' ? 'bg-primary' : '' }}"
-                                        href="{{ route('stock.index', ['filter[type]' => '<']) }}">
+                                        href="{{ route('stock.index', ['filter[type]' => '<', 'sort' => '-created_at']) }}">
                                         Stok Keluar
                                      </a>
                                 </li>
@@ -116,16 +116,16 @@
                         </li>
                     </ul>
                 </div>
-                
-                
+
+
                 <script>
                     function toggleSubMenu(submenuId) {
                         const submenu = document.getElementById(submenuId);
                         submenu.style.display = submenu.style.display === 'none' ? 'block' : 'none';
                     }
                 </script>
-                
-                
+
+
                 <!-- Main Content -->
                 <div class="col-md-9 offset-md-3" style="padding-top: 80px; padding-left: 15px;">
                     <main class="py-4">

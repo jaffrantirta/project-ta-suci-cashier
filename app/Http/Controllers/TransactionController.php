@@ -11,6 +11,7 @@ use App\Queries\ItemQuery;
 use App\Queries\TransactionQuery;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Models\Stock;
 
 class TransactionController extends Controller
 {
@@ -52,6 +53,14 @@ class TransactionController extends Controller
                 'item_price' => $item->price,
                 'amount' => $item->quantity,
                 'total' => $item->getPriceSum()
+            ]);
+
+
+            $stock = Stock::where('item_id', $item->id)->latest()->first();
+            Stock::create([
+                'item_id' => $item->id,
+                'change_amount' => -$item->quantity,
+                'amount' => 0,
             ]);
         }
         DB::commit();

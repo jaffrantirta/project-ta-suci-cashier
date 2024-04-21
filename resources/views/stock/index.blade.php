@@ -10,7 +10,7 @@
             <a href="{{ route('stock.create') }}" class="btn btn-primary mb-2">Tambah</a>
             <div class="card">
                 <div class="card-header">Stok barang</div>
-                
+
                 <div class="card-body">
                     <form action="{{ route('stock.index') }}" method="GET" class="mb-3">
                         <div class="input-group">
@@ -28,6 +28,7 @@
                                 <th>Kode barang</th>
                                 <th>Nama Barang</th>
                                 <th>Jumlah</th>
+                                <th>Jumlah Stok Akhir</th>
                                 <th>Keterangan</th>
                             </tr>
                         </thead>
@@ -41,6 +42,7 @@
                                     <td class="{{ $stock->change_amount > 0 ? 'text-success' : ($stock->change_amount < 0 ? 'text-danger' : '') }}">
                                         {{ $stock->change_amount }}
                                     </td>
+                                    <td>{{ $stock->amount }}</td>
                                     <td>
                                         @if ($stock->change_amount > 0)
                                             Stok Masuk
