@@ -88,7 +88,7 @@ php artisan serve
 npm run dev
 ```
 
-dan sistem sudah berjalan bisa dilihat di browser dengan link [ini](http://127.0.0.1:8000/dashboard)
+dan sistem sudah berjalan bisa dilihat di browser dengan link [ini](http://127.0.0.1:8000/home)
 
 ## Selesai
 
