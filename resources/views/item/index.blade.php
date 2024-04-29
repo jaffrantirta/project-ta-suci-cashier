@@ -10,7 +10,7 @@
             <a href="{{ route('item.create') }}" class="btn btn-primary mb-2">Tambah</a>
             <div class="card">
                 <div class="card-header">Barang</div>
-                
+
                 <div class="card-body">
                     <form action="{{ route('item.index') }}" method="GET" class="mb-3">
                         <div class="input-group">
@@ -26,6 +26,7 @@
                                 <th>No.</th>
                                 <th>SKU</th>
                                 <th>Nama barang</th>
+                                <th>Stok</th>
                                 <th>Harga</th>
                                 <th>Actions</th>
                             </tr>
@@ -36,6 +37,7 @@
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $item->sku }}</td>
                                     <td>{{ $item->name }}</td>
+                                    <td>{{ $item->stock->amount }}</td>
                                     <td>Rp{{ number_format($item->price) }}</td>
                                     <td>
                                         <a href="{{ route('item.show', ['item' => $item->id]) }}" class="btn btn-primary">Detail</a>

@@ -85,7 +85,7 @@
                             <a class="nav-link text-dark border rounded {{ Route::currentRouteName() === 'home' ? 'bg-primary' : '' }}" href="{{ route('home') }}">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark border rounded {{ Route::currentRouteName() === 'transaction.index' ? 'bg-primary' : '' }}" href="{{ route('transaction.index') }}">Transaksi</a>
+                            <a class="nav-link text-dark border rounded {{ Route::currentRouteName() === 'transaction.index' ? 'bg-primary' : '' }}" href="{{ route('transaction.index', ['sort' => '-created_at']) }}">Transaksi</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark border rounded {{ Route::currentRouteName() === 'transaction.create' ? 'bg-primary' : '' }}" href="{{ route('transaction.create') }}">Tambah Transaksi Baru</a>

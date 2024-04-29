@@ -16,7 +16,7 @@ class ItemQuery extends PaginatedQuery
     }
 
     protected array $append = [
-        // 'phone',
+        'stock',
     ];
 
     protected string $adminPermission = 'item.view-sensitive-data';
