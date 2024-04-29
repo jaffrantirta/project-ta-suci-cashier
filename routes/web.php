@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,8 +35,7 @@ Route::resource('stock', StockController::class);
 Route::resource('item', ItemController::class);
 Route::resource('report', ReportController::class);
 Route::resource('cart', CartController::class);
-
+Route::resource('user', UserController::class);
 
 Route::get('/transaction/{transaction}/receipt', [TransactionController::class, 'receipt'])
     ->name('transaction.receipt');
-
