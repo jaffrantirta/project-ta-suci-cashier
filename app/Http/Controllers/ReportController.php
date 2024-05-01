@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\Stock;
+use App\Models\Transaction;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -18,17 +21,38 @@ class ReportController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'from_date' => 'required|date|before_or_equal:today',
+            'to_date' => 'required|date|after_or_equal:from_date',
+            'type' => 'required',
+        ]);
+        if ($request->type == 'stock') {
+            $data = Stock::whereBetween('created_at', [$request->from_date, $request->to_date])
+                ->where('change_amount', '>', 0)
+                ->with('item')
+                ->orderBy('created_at', 'desc')
+                ->get();
+        } else {
+            $data = Transaction::whereBetween('created_at', [$request->from_date, $request->to_date])
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }
+        // dd($data);
+
+        if ($data == null) {
+            return redirect()->back()->with('error', 'Data Tidak Ditemukan');
+        }
+
+        $pdf = Pdf::loadView('PDFs.report', [
+            'data' => $data,
+            'type' => $request->type,
+            'from_date' => $request->from_date,
+            'to_date' => $request->to_date
+        ]);
+
+        return $pdf->stream();
     }
 
     /**
