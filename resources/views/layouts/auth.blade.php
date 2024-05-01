@@ -22,7 +22,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="container-fluid" style="background-image: url('https://t3.ftcdn.net/jpg/02/77/30/98/360_F_277309825_h8RvZkoyBGPDocMtippdfe3497xTrOXO.jpg'); background-repeat: repeat; background-size: cover; min-height: 100vh;">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="position: fixed; width: 100%; z-index: 1000;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">

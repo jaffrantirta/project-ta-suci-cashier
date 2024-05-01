@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Enums\PaymentMethod;
 use App\Http\Requests\TransactionStoreRequest;
 use App\Http\Requests\TransactionUpdateRequest;
+use App\Models\Stock;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use App\Queries\ItemQuery;
 use App\Queries\TransactionQuery;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use App\Models\Stock;
 
 class TransactionController extends Controller
 {
@@ -54,7 +54,6 @@ class TransactionController extends Controller
                 'amount' => $item->quantity,
                 'total' => $item->getPriceSum()
             ]);
-
 
             $stock = Stock::where('item_id', $item->id)->latest()->first();
             Stock::create([

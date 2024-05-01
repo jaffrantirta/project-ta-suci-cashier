@@ -17,7 +17,7 @@
                                 <!-- Item name -->
                                 <div class="form-group">
                                     <label for="item_name">Kode Barang (SKU)</label>
-                                    <input type="text" class="form-control" id="sku" name="sku" required>
+                                    <input autofocus type="text" class="form-control" id="sku" name="sku" required>
                                 </div>
                             </div>
                             <div class="col-md-12 mt-1">
@@ -52,7 +52,7 @@
                                 </div>
                             </div>
                         </div>
-                    
+
 
                     <!-- Table list cart -->
                     <div class="table-responsive mt-3">
@@ -71,7 +71,11 @@
                                 <tr>
                                     <td>{{$item->name}}</td>
                                     <td>Rp{{number_format($item->price)}}</td>
-                                    <td>{{number_format($item->quantity)}}</td>
+                                    <td>
+                                        <button type="button" onclick="updateQuantity({{$item->id}}, -1)" class="btn btn-outline-secondary mx-1">-</button>
+                                        {{number_format($item->quantity)}}
+                                        <button type="button" onclick="updateQuantity({{$item->id}}, 1)" class="btn btn-outline-secondary mx-1">+</button>
+                                    </td>
                                     <td>Rp{{number_format($item->getPriceSum())}}</td>
                                 </tr>
                                 @endforeach
@@ -97,4 +101,27 @@
         </div>
     </div>
 </div>
+
+<script>
+
+        const updateQuantity = function(id, quantity) {
+            const url = '{{ route('cart.update', ['cart' => 'id']) }}'.replace('id', id);
+
+            fetch(url, {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    quantity: quantity,
+                })
+            })
+            .then(() => window.location.reload())
+        };
+
+</script>
+
 @endsection
+

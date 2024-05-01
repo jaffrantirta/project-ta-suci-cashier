@@ -30,4 +30,19 @@ class CartController extends Controller
 
         return redirect()->back();
     }
+
+    public function update(Request $request, $cart)
+    {
+        // dd($request->quantity);
+        \Cart::update($cart, array(
+            'quantity' => $request->quantity
+        ));
+
+        return redirect()->back();
+    }
+
+    public function destroy($rowId)
+    {
+        \Cart::remove($rowId);
+    }
 }
