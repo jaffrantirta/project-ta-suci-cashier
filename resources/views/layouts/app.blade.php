@@ -122,6 +122,9 @@
                             <a class="nav-link text-light rounded {{ Route::currentRouteName() === 'item.index' ? 'bg-primary' : '' }}" href="{{ route('item.index') }}"><i class="fas fa-boxes-stacked me-2"></i>Barang</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-light rounded {{ Route::currentRouteName() === 'user.index' ? 'bg-primary' : '' }}" href="{{ route('user.index') }}"><i class="fas fa-users me-2"></i>Karyawan</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-light rounded {{ Route::currentRouteName() === 'report.index' ? 'bg-primary' : '' }}" href="{{ route('report.index') }}"><i class="fas fa-file me-2"></i>Laporan</a>
                         </li>
                     </ul>

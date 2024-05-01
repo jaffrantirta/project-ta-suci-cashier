@@ -39,6 +39,20 @@
                                 </span>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label for="role">Role</label>
+                            <select class="form-control @error('role') is-invalid @enderror" id="role" name="role" required>
+                                <option value="">-- Pilih Role --</option>
+                                <option value="cashier" {{ isset($user) && $user->role == 'cashier' ? 'selected' : '' }}>Kasir</option>
+                                <option value="operation" {{ isset($user) && $user->role == 'operation' ? 'selected' : '' }}>Operasi Gudang</option>
+                            </select>
+                            @error('role')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
                         <button type="submit" class="btn btn-primary mt-2">Submit</button>
                     </form>
                 </div>

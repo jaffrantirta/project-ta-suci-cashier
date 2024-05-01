@@ -23,7 +23,8 @@ class UserController extends Controller
 
     public function store(UserStoreRequest $request)
     {
-        User::create($request->validated());
+        $user = User::create($request->validated());
+        $user->assignRole($request->get('role'));
         return redirect('user')->with('success', 'User created successfully.');
     }
 
@@ -43,6 +44,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return response()->noContent();
+        return redirect('user')->with('success', 'Berhasil hapus.');
     }
 }
