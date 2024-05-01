@@ -15,9 +15,7 @@
                     <form action="{{ route('item.index') }}" method="GET" class="mb-3">
                         <div class="input-group">
                             <input type="search" id="searchInput" class="form-control" placeholder="Search by name..." name="filter[name]">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-primary">Search</button>
-                            </div>
+                            <button type="submit" class="btn btn-outline-secondary">Search</button>
                         </div>
                     </form>
                     <table class="table">
@@ -40,8 +38,14 @@
                                     <td>{{ $item->stock->amount }}</td>
                                     <td>Rp{{ number_format($item->price) }}</td>
                                     <td>
-                                        <a href="{{ route('item.show', ['item' => $item->id]) }}" class="btn btn-primary">Detail</a>
-                                        <a href="{{ route('item.edit', ['item' => $item->id]) }}" class="btn btn-primary">Edit</a>
+                                            <a href="{{ route('item.show', ['item' => $item->id]) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                                            <a href="#" onclick="event.preventDefault();
+                                            if(confirm('Apakah anda yakin ingin menghapus {{ $item->name }}?')) {
+                                            document.getElementById('delete-form-{{ $item->id }}').submit(); }" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                            <form id="delete-form-{{ $item->id }}" action="{{ route('item.destroy', ['item' => $item->id]) }}" method="POST" style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                            </form>
                                     </td>
                                 </tr>
                             @endforeach

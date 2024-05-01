@@ -15,9 +15,7 @@
                     <form action="{{ route('stock.index') }}" method="GET" class="mb-3">
                         <div class="input-group">
                             <input type="search" id="searchInput" class="form-control" placeholder="Cari berdasarkan nama barang..." name="filter[item.name]">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-primary">Search</button>
-                            </div>
+                            <button type="submit" class="btn btn-outline-secondary">Search</button>
                         </div>
                     </form>
                     <table class="table">
@@ -45,9 +43,9 @@
                                     <td>{{ $stock->amount }}</td>
                                     <td>
                                         @if ($stock->change_amount > 0)
-                                            Stok Masuk
+                                            <div class="badge text-bg-success">Stok Masuk</div>
                                         @elseif ($stock->change_amount < 0)
-                                            Stok Berkurang
+                                        <div class="badge text-bg-danger">Stok Keluar</div>
                                         @endif
                                     </td>
                                 </tr>
