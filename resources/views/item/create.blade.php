@@ -39,6 +39,15 @@
                                 </span>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label for="unit_of_stock">Nama Satuan</label>
+                            <input type="text" class="form-control @error('unit_of_stock') is-invalid @enderror" id="unit_of_stock" name="unit_of_stock" step="0.01" value="{{ isset($item) ? old('unit_of_stock') ?? $item->unit_of_stock : '' }}" required>
+                            @error('unit_of_stock')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                         <button type="submit" class="btn btn-primary mt-2">Submit</button>
                     </form>
                 </div>

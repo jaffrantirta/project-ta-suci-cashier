@@ -25,6 +25,7 @@
                                 <th>SKU</th>
                                 <th>Nama barang</th>
                                 <th>Stok</th>
+                                <th>Satuan</th>
                                 <th>Harga</th>
                                 <th>Actions</th>
                             </tr>
@@ -35,7 +36,8 @@
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $item->sku }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $item->stock->amount }}</td>
+                                    <td>{{ $item->stock?->amount }}</td>
+                                    <td>{{ $item->unit_of_stock }}</td>
                                     <td>Rp{{ number_format($item->price) }}</td>
                                     <td>
                                             <a href="{{ route('item.show', ['item' => $item->id]) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
