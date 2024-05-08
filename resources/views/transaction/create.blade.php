@@ -71,10 +71,9 @@
                                 <tr>
                                     <td>{{$item->name}}</td>
                                     <td>Rp{{number_format($item->price)}}</td>
-                                    <td>
-                                        <button type="button" onclick="updateQuantity({{$item->id}}, -1)" class="btn btn-outline-secondary mx-1">-</button>
-                                        {{number_format($item->quantity)}}
-                                        <button type="button" onclick="updateQuantity({{$item->id}}, 1)" class="btn btn-outline-secondary mx-1">+</button>
+                                    <td class="input-group">
+                                        <input class="form-control cart-quantity" type="number" value="{{ $item->quantity }}" id="quantity-{{ $item->id }}" />
+                                        <button type="button" onclick="updateQuantity({{$item->id}})" class="btn btn-outline-secondary mx-1"><i class="fa fa-check"></i></button>
                                     </td>
                                     <td>Rp{{number_format($item->getPriceSum())}}</td>
                                 </tr>
@@ -87,6 +86,37 @@
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <h5>Jumlah Total: Rp{{number_format($sub_total)}}</h5>
+                            <h5 id="grand_total" style="display: none">{{$sub_total}}</h5>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <h5>Metode Pembayaran:</h5>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment_method" onclick="showFormAmountAndChange()" id="payment_method_transfer" value="transfer">
+                                <label class="form-check-label" for="payment_method_transfer">
+                                    Transfer
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="payment_method" onclick="showFormAmountAndChange()" id="payment_method_cash" value="cash">
+                                <label class="form-check-label" for="payment_method_cash">
+                                    Cash
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3" id="show_form_amount_and_change" style="display: none">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="pay_amount">Jumlah Uang</label>
+                                <input type="number" class="form-control" name="pay_amount" id="pay_amount" onchange="console.log('asas')">
+                            </div>
+                            <div class="form-group">
+                                <label for="change_amount">Kembalian</label>
+                                <input type="number" readonly class="form-control" name="change_amount" id="change_amount">
+                            </div>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -104,7 +134,31 @@
 
 <script>
 
-        const updateQuantity = function(id, quantity) {
+        const calculateChange = function() {
+            const payAmount = document.querySelector('#pay_amount').value;
+            const subTotal = document.querySelector('#sub_total').value;
+            const changeAmount = payAmount - subTotal;
+            console.log(changeAmount);
+            document.querySelector('#change_amount').value = changeAmount;
+        };
+
+        const showFormAmountAndChange = function() {
+            const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
+            if (paymentMethod === 'cash') {
+                document.querySelector('#show_form_amount_and_change').style.display = 'block';
+            } else {
+                document.querySelector('#show_form_amount_and_change').style.display = 'none';
+            }
+        };
+
+        const updateQuantity = function(id) {
+            const quantityInput = document.querySelector(`#quantity-${id}`);
+            const quantity = parseInt(quantityInput.value);
+
+            if (quantity < 1) {
+                quantityInput.value = 1;
+                return;
+            }
             const url = '{{ route('cart.update', ['cart' => 'id']) }}'.replace('id', id);
 
             fetch(url, {

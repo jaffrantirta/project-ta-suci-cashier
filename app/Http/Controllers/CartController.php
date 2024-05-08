@@ -33,9 +33,9 @@ class CartController extends Controller
 
     public function update(Request $request, $cart)
     {
-        // dd($request->quantity);
+        $result = $request->quantity - \Cart::get($cart)->quantity;
         \Cart::update($cart, array(
-            'quantity' => $request->quantity
+            'quantity' => $result
         ));
 
         return redirect()->back();
