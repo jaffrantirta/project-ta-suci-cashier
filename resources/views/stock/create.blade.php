@@ -35,6 +35,16 @@
                                 </span>
                             @enderror
                         </div>
+
+                        <div class="form-group">
+                            <label for="supplier_name">Nama Supplier</label>
+                            <input type="text" class="form-control @error('supplier_name') is-invalid @enderror" id="supplier_name" name="supplier_name" value="{{ isset($stock) ? old('supplier_name') ?? $stock->supplier_name : '' }}" required>
+                            @error('supplier_name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                         <input name="amount" value="0" class="d-none"/>
                         <button type="submit" class="btn btn-primary mt-2">Submit</button>
                     </form>

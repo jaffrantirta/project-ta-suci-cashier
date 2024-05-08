@@ -17,7 +17,8 @@ class ItemStoreRequest extends FormRequest
         return [
             'name' => ['required', 'min:3'],
             'sku' => ['required', 'min:5', 'unique:items,sku,except,id'],
-            'price' => ['required', 'min:3', 'numeric']
+            'price' => ['required', 'min:3', 'numeric'],
+            'unit_of_stock' => ['required'],
         ];
     }
 }

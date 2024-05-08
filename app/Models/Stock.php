@@ -13,7 +13,9 @@ class Stock extends Model
     protected $fillable = [
         'item_id',
         'change_amount',
-        'amount'
+        'amount',
+        'number_of_invoice',
+        'supplier_name'
     ];
 
     public function setAmountAttribute($value)

@@ -14,6 +14,7 @@ class Item extends Model
         'sku',
         'name',
         'price',
+        'unit_of_stock',
     ];
 
     public function getStockAttribute()

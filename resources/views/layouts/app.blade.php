@@ -105,7 +105,7 @@
                             <ul class="nav flex-column gap-1 pl-3" id="stok-submenu" style="display: none;">
                                 <li class="nav-item">
                                     <a class="nav-link text-light rounded {{ request()->input('filter.type') === '>' ? 'bg-secondary' : '' }}"
-                                        href="{{ route('stock.index', ['filter[type]' => '>', 'sort' => '-created_at']) }}">
+                                        href="{{ route('stock.index', ['filter[type]' => '>', 'sort' => '-created_at', 'include[]' => 'item']) }}">
                                         Stok Masuk
                                      </a>
 

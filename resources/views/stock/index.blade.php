@@ -27,6 +27,7 @@
                                 <th>Nama Barang</th>
                                 <th>Jumlah</th>
                                 <th>Jumlah Stok Akhir</th>
+                                <th>Satuan</th>
                                 <th>Keterangan</th>
                             </tr>
                         </thead>
@@ -41,9 +42,12 @@
                                         {{ $stock->change_amount }}
                                     </td>
                                     <td>{{ $stock->amount }}</td>
+                                    <td>{{ $stock->item->unit_of_stock }}</td>
                                     <td>
                                         @if ($stock->change_amount > 0)
                                             <div class="badge text-bg-success">Stok Masuk</div>
+                                            <div>supplier : {{ $stock->supplier_name }}</div>
+                                            <div>{{ $stock->number_of_invoice }}</div>
                                         @elseif ($stock->change_amount < 0)
                                         <div class="badge text-bg-danger">Stok Keluar</div>
                                         @endif
@@ -52,6 +56,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $stocks->links('vendor.pagination.custom') }}
                 </div>
             </div>
         </div>

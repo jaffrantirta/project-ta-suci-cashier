@@ -22,7 +22,8 @@ class ItemUpdateRequest extends FormRequest
                 'min:5',
                 Rule::unique('items')->ignore($this->item->id),
             ],
-            'price' => ['required', 'min:3', 'numeric']
+            'price' => ['required', 'min:3', 'numeric'],
+            'unit_of_stock' => ['required'],
         ];
     }
 }

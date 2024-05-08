@@ -38,6 +38,8 @@ class StockQuery extends PaginatedQuery
             }),
             AllowedFilter::partial('amount'),
             AllowedFilter::partial('item.name'),
+            AllowedFilter::partial('supplier_name'),
+            AllowedFilter::partial('number_of_invoice'),
         ];
     }
 

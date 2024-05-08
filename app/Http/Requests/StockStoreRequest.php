@@ -17,7 +17,8 @@ class StockStoreRequest extends FormRequest
         return [
             'item_id' => ['required'],
             'change_amount' => ['required', 'numeric'],
-            'amount' => ['nullable']
+            'amount' => ['nullable'],
+            'supplier_name' => ['required'],
         ];
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Requests\StockUpdateRequest;
 use App\Models\Item;
 use App\Models\Stock;
 use App\Queries\StockQuery;
+use Carbon\Carbon;
 
 class StockController extends Controller
 {
@@ -26,7 +27,7 @@ class StockController extends Controller
 
     public function store(StockStoreRequest $request)
     {
-        Stock::create($request->validated());
+        Stock::create(array_merge($request->validated(), ['number_of_invoice' => $this->generateInvoiceNumber()]));
         return redirect('stock')->with('success', 'Stok telah disismpan');
     }
 
@@ -47,5 +48,27 @@ class StockController extends Controller
     {
         $stock->delete();
         return redirect('stock')->with('success', 'Stok telah dihapus');
+    }
+
+    function generateInvoiceNumber()
+    {
+        // Get the current month in Roman numerals
+        $monthInRoman = Carbon::now()->format('M');
+
+        // Get the current year
+        $year = Carbon::now()->format('Y');
+
+        // Get the current number of invoices for the month
+        $currentMonthInvoicesCount = Stock::whereYear('created_at', $year)
+            ->whereMonth('created_at', Carbon::now()->month)
+            ->count();
+
+        // Increment the count by 1 for the new invoice
+        $invoiceNumber = $currentMonthInvoicesCount + 1;
+
+        // Format the invoice number
+        $formattedInvoiceNumber = sprintf('#NOTA/IN/%s/%s/%d', $monthInRoman, $year, $invoiceNumber);
+
+        return $formattedInvoiceNumber;
     }
 }
