@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Stock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $bestSeller = Stock::where('change_amount', '<', 0)
+            ->select('item_id', DB::raw('SUM(change_amount) as quantity'))
+            ->groupBy('item_id')
+            ->orderBy('quantity', 'asc')
+            ->with('item')
+            ->get();
+
+        return view('home', compact('bestSeller'));
     }
 }
