@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laporan {{$type === 'stock' ? 'Stok Masuk' : 'Penjualan'}}</title>
+    <title>Laporan {{$type === 'stock' ? 'Stok Masuk' : ($type === 'stockout' ? 'Stok Keluar' : ($type === 'opname' ? 'Stok Opname' : 'Penjualan'))}}</title>
 </head>
 <body>
     <footer>
         <p>
-            Nama Toko<br>
-            Jalan Denpasar Raya No. 1<br>
-            Phone : +62 81712512 ; Email : hola@email.com<br>
+            {{ env('NOTA_TITLE' ?? 'LARAVEL') }}<br>
+            {{ env('NOTA_DESCRIPTION' ?? 'LARAVEL DESC') }}
         </p>
     </footer>
     <table class="fw">
@@ -17,7 +16,7 @@
             <img alt="logo-KV" src="{{ asset('assets/image/kv_logo.jpeg') }}" width="250"/>
         </td> --}}
         <td class="hw">
-            <h2>Laporan {{$type === 'stock' ? 'Stok Masuk' : ($type === 'stockout' ? 'Stok Keluar' : 'Penjualan')}}</h2>
+            <h2>Laporan {{$type === 'stock' ? 'Stok Masuk' : ($type === 'stockout' ? 'Stok Keluar' : ($type === 'opname' ? 'Stok Opname' : 'Penjualan'))}}</h2>
         </td>
     </tr>
     </table>
@@ -58,6 +57,32 @@
             @endforeach
         </table>
     </div>
+@elseif ($type == 'opname')
+<div class="centered-div">
+    <table class="full-table bordered-table">
+        <tr>
+            <th class="bordered-table-header">No.</th>
+            <th class="bordered-table-header">Tanggal</th>
+            <th class="bordered-table-header">Kode Barang</th>
+            <th class="bordered-table-header">Nama Barang</th>
+            <th class="bordered-table-header">Fisik</th>
+            <th class="bordered-table-header">Selisih</th>
+            <th class="bordered-table-header">Satuan</th>
+        </tr>
+        @foreach ($data as $key => $d)
+            <tr>
+                <td class="bordered-table-content">{{$key+1}}</td>
+                <td class="bordered-table-content">{{\Carbon\Carbon::parse($d->created_at)->format('d M Y H:m:i')}}</td>
+                <td class="bordered-table-content">{{$d->item->sku}}</td>
+                <td class="bordered-table-content">{{$d->item->name}}</td>
+                <td class="bordered-table-content">{{$d->real_stock}}</td>
+                <td class="bordered-table-content">{{$d->diff_stock}}</td>
+                <td class="bordered-table-content">{{$d->item->unit_of_stock}}</td>
+            </tr>
+        @endforeach
+    </table>
+</div>
+
     @else
     <div class="centered-div">
         <table class="full-table bordered-table">

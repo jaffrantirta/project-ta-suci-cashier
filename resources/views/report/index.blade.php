@@ -44,6 +44,7 @@
                                 <option value="sales">Laporan Penjualan</option>
                                 <option value="stock">Laporan Stok Masuk</option>
                                 <option value="stockout">Laporan Stok Keluar</option>
+                                <option value="opname">Laporan Stok Opname</option>
                             </select>
                             @error('type')
                                 <span class="invalid-feedback" role="alert">

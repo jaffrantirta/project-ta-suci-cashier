@@ -26,4 +26,14 @@ class Item extends Model
     {
         return $this->hasMany(Stock::class);
     }
+
+    /**
+     * Get all of the opname for the Item
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function opname(): HasMany
+    {
+        return $this->hasMany(Opname::class);
+    }
 }

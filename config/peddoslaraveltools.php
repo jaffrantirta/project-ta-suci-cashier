@@ -106,6 +106,27 @@ return [
             'name' => 'transactiondetail.delete',
             'roles' => ['owner']
         ],
+        // opname
+        [
+            'name' => 'opname.create',
+            'roles' => ['operation']
+        ],
+        [
+            'name' => 'opname.update',
+            'roles' => ['operation']
+        ],
+        [
+            'name' => 'opname.view',
+            'roles' => ['operation']
+        ],
+        [
+            'name' => 'opname.viewAny',
+            'roles' => ['operation']
+        ],
+        [
+            'name' => 'opname.delete',
+            'roles' => ['operation']
+        ],
     ],
     'max_login_attempt' => 3,
 ];

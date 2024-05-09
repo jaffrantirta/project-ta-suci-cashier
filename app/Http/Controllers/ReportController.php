@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\Opname;
 use App\Models\Stock;
 use App\Models\Transaction;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -29,23 +31,28 @@ class ReportController extends Controller
             'type' => 'required',
         ]);
         if ($request->type == 'stock') {
-            $data = Stock::whereBetween('created_at', [$request->from_date, $request->to_date])
+            $data = Stock::whereBetween('created_at', [Carbon::parse($request->from_date)->startOfDay(), Carbon::parse($request->to_date)->endOfDay()])
                 ->where('change_amount', '>', 0)
                 ->with('item')
                 ->orderBy('created_at', 'desc')
                 ->get();
         } elseif ($request->type == 'stockout') {
-            $data = Stock::whereBetween('created_at', [$request->from_date, $request->to_date])
+            $data = Stock::whereBetween('created_at', [Carbon::parse($request->from_date)->startOfDay(), Carbon::parse($request->to_date)->endOfDay()])
                 ->where('change_amount', '<', 0)
                 ->with('item')
                 ->orderBy('created_at', 'desc')
                 ->get();
+        } elseif ($request->type == 'opname') {
+            $data = Opname::whereBetween('created_at', [Carbon::parse($request->from_date)->startOfDay(), Carbon::parse($request->to_date)->endOfDay()])
+                ->with('item')
+                ->orderBy('created_at', 'desc')
+                ->get();
         } else {
-            $data = Transaction::whereBetween('created_at', [$request->from_date, $request->to_date])
+            $data = Transaction::whereBetween('created_at', [Carbon::parse($request->from_date)->startOfDay(), Carbon::parse($request->to_date)->endOfDay()])
                 ->orderBy('created_at', 'desc')
                 ->get();
         }
-        // dd($data);
+        // dd(Opname::whereBetween('created_at', [$request->from_date, $request->to_date])->get());
 
         if ($data == null) {
             return redirect()->back()->with('error', 'Data Tidak Ditemukan');

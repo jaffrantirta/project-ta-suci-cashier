@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\OpnameController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\StockController;
@@ -36,6 +37,7 @@ Route::resource('item', ItemController::class);
 Route::resource('report', ReportController::class);
 Route::resource('cart', CartController::class);
 Route::resource('user', UserController::class);
+Route::resource('opname', OpnameController::class);
 
 Route::get('/transaction/{transaction}/receipt', [TransactionController::class, 'receipt'])
     ->name('transaction.receipt');

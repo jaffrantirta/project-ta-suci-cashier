@@ -137,6 +137,12 @@
                         </li>
                         @endcan
 
+                        @can('opname.create')
+                        <li class="nav-item">
+                            <a class="nav-link text-light rounded {{ Route::currentRouteName() === 'opname.index' ? 'bg-primary' : '' }}" href="{{ route('opname.index') }}"><i class="fas fa-cubes me-2"></i>Stok Opname</a>
+                        </li>
+                        @endcan
+
                         <li class="nav-item">
                             <a class="nav-link text-light rounded {{ Route::currentRouteName() === 'report.index' ? 'bg-primary' : '' }}" href="{{ route('report.index') }}"><i class="fas fa-file me-2"></i>Laporan</a>
                         </li>
