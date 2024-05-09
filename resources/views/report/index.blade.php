@@ -43,6 +43,7 @@
                                 <option value="">Pilih jenis laporan</option>
                                 <option value="sales">Laporan Penjualan</option>
                                 <option value="stock">Laporan Stok Masuk</option>
+                                <option value="stockout">Laporan Stok Keluar</option>
                             </select>
                             @error('type')
                                 <span class="invalid-feedback" role="alert">

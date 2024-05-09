@@ -17,7 +17,7 @@
             <img alt="logo-KV" src="{{ asset('assets/image/kv_logo.jpeg') }}" width="250"/>
         </td> --}}
         <td class="hw">
-            <h2>Laporan {{$type === 'stock' ? 'Stok Masuk' : 'Penjualan'}}</h2>
+            <h2>Laporan {{$type === 'stock' ? 'Stok Masuk' : ($type === 'stockout' ? 'Stok Keluar' : 'Penjualan')}}</h2>
         </td>
     </tr>
     </table>
@@ -37,14 +37,14 @@
             </tr>
         </table>
     </div>
-    @if ($type == 'stock')
+    @if ($type == 'stock' || $type == 'stockout')
     <div class="centered-div">
         <table class="full-table bordered-table">
             <tr>
                 <th class="bordered-table-header">No.</th>
                 <th class="bordered-table-header">Tanggal</th>
                 <th class="bordered-table-header">Nama Barang</th>
-                <th class="bordered-table-header">Stok Masuk</th>
+                <th class="bordered-table-header">Stok {{ $type == 'stockout' ? 'Keluar' : 'Masuk' }}</th>
                 <th class="bordered-table-header">Stok Akhir</th>
             </tr>
             @foreach ($data as $key => $d)

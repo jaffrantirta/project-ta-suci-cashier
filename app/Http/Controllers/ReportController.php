@@ -34,6 +34,12 @@ class ReportController extends Controller
                 ->with('item')
                 ->orderBy('created_at', 'desc')
                 ->get();
+        } elseif ($request->type == 'stockout') {
+            $data = Stock::whereBetween('created_at', [$request->from_date, $request->to_date])
+                ->where('change_amount', '<', 0)
+                ->with('item')
+                ->orderBy('created_at', 'desc')
+                ->get();
         } else {
             $data = Transaction::whereBetween('created_at', [$request->from_date, $request->to_date])
                 ->orderBy('created_at', 'desc')
