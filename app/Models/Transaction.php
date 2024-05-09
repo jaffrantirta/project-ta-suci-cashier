@@ -18,13 +18,14 @@ class Transaction extends Model
         'total_of_item',
         'total_of_amount',
         'payment_method',
-        'attributes'
+        'attributes',
+        'pay_amount',
+        'change_amount',
     ];
 
     // protected $casts = [
     //     'payment_method' => PaymentMethod::class,
     // ];
-
 
     protected $appends = [
         'customer_name',
@@ -42,7 +43,6 @@ class Transaction extends Model
         $attributes = json_decode($this->attributes['attributes'], true);
         return $attributes['customer_address'] ?? null;
     }
-
 
     public function user(): BelongsTo
     {

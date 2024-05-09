@@ -5,6 +5,7 @@ namespace App\Enums;
 enum PaymentMethod: int
 {
     case CASH = 1;
+    case TRANSFER = 2;
 
     function toString()
     {

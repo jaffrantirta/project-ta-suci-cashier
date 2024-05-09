@@ -86,7 +86,7 @@
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <h5>Jumlah Total: Rp{{number_format($sub_total)}}</h5>
-                            <h5 id="grand_total" style="display: none">{{$sub_total}}</h5>
+                            <input id="sub_total" value={{$sub_total}} style="display: none"/>
                         </div>
                     </div>
 
@@ -94,13 +94,13 @@
                         <div class="col-md-12">
                             <h5>Metode Pembayaran:</h5>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="payment_method" onclick="showFormAmountAndChange()" id="payment_method_transfer" value="transfer">
+                                <input class="form-check-input" type="radio" name="payment_method" onclick="showFormAmountAndChange()" id="payment_method_transfer" value="2">
                                 <label class="form-check-label" for="payment_method_transfer">
                                     Transfer
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="payment_method" onclick="showFormAmountAndChange()" id="payment_method_cash" value="cash">
+                                <input class="form-check-input" type="radio" name="payment_method" onclick="showFormAmountAndChange()" id="payment_method_cash" value="1">
                                 <label class="form-check-label" for="payment_method_cash">
                                     Cash
                                 </label>
@@ -111,7 +111,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="pay_amount">Jumlah Uang</label>
-                                <input type="number" class="form-control" name="pay_amount" id="pay_amount" onchange="console.log('asas')">
+                                <input type="number" class="form-control" name="pay_amount" id="pay_amount" onchange="calculateChange()">
                             </div>
                             <div class="form-group">
                                 <label for="change_amount">Kembalian</label>
@@ -138,13 +138,12 @@
             const payAmount = document.querySelector('#pay_amount').value;
             const subTotal = document.querySelector('#sub_total').value;
             const changeAmount = payAmount - subTotal;
-            console.log(changeAmount);
             document.querySelector('#change_amount').value = changeAmount;
         };
 
         const showFormAmountAndChange = function() {
             const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
-            if (paymentMethod === 'cash') {
+            if (paymentMethod === '1') {
                 document.querySelector('#show_form_amount_and_change').style.display = 'block';
             } else {
                 document.querySelector('#show_form_amount_and_change').style.display = 'none';

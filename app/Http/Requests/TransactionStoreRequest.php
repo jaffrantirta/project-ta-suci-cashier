@@ -20,7 +20,10 @@ class TransactionStoreRequest extends FormRequest
             'total_of_item' => ['forbidden'],
             'total_of_amount' => ['forbidden'],
             'address' => ['nullable'],
-            'payment_method' => ['forbidden'],
+            'payment_method' => ['required'],
+            'attributes' => ['forbidden'],
+            'pay_amount' => ['nullable'],
+            'change_amount' => ['nullable'],
         ];
     }
 }

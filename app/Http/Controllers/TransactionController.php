@@ -38,7 +38,9 @@ class TransactionController extends Controller
             'issued_by' => auth()->user()->id,
             'total_of_item' => \Cart::getTotalQuantity(),
             'total_of_amount' => \Cart::getSubTotal(),
-            'payment_method' => 1,
+            'payment_method' => $request->payment_method,
+            'pay_amount' => $request->pay_amount,
+            'change_amount' => $request->change_amount,
             'attributes' => json_encode([
                 'customer_name' => $request->customer_name,
                 'customer_address' => $request->customer_address

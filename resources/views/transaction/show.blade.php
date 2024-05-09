@@ -33,6 +33,9 @@
                         @endforeach
                     </tbody>
                 </table>
+            <p class="card-text"><strong>Metode pembayaran:</strong> {{$transaction->payment_method == '1' ? 'Cash' : 'Transfer'}}</p>
+            <p class="card-text"><strong>Pembayaran:</strong> Rp.{{ number_format($transaction->pay_amount) }}</p>
+            <p class="card-text"><strong>Kembalian:</strong> Rp.{{ number_format($transaction->change_amount) }}</p>
             @endif
         </div>
     </div>

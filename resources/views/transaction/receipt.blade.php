@@ -73,6 +73,24 @@
                         @endif
                     </tbody>
                 </table>
+
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Payment Method</th>
+                            <th>Pay Amount</th>
+                            <th>Change Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ $transaction->payment_method == '1' ? 'Cash' : 'Transfer' }}</td>
+                            <td>Rp.{{ number_format($transaction->pay_amount) }}</td>
+                            <td>Rp.{{ number_format($transaction->change_amount) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
