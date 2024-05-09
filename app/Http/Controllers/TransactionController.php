@@ -39,7 +39,7 @@ class TransactionController extends Controller
             'total_of_item' => \Cart::getTotalQuantity(),
             'total_of_amount' => \Cart::getSubTotal(),
             'payment_method' => $request->payment_method,
-            'pay_amount' => $request->pay_amount,
+            'pay_amount' => $request->payment_method == '1' ? $request->pay_amount : \Cart::getSubTotal(),
             'change_amount' => $request->change_amount,
             'attributes' => json_encode([
                 'customer_name' => $request->customer_name,

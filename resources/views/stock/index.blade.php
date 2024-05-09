@@ -47,7 +47,7 @@
                                         @if ($stock->change_amount > 0)
                                             <div class="badge text-bg-success">Stok Masuk</div>
                                             <div>supplier : {{ $stock->supplier_name }}</div>
-                                            <div>{{ $stock->number_of_invoice }}</div>
+                                            <a class="btn btn-sm btn-secondary mt-2" href="{{ route('stock.show', ['stock' => $stock->id]) }}">{{ $stock->number_of_invoice }}</a>
                                         @elseif ($stock->change_amount < 0)
                                         <div class="badge text-bg-danger">Stok Keluar</div>
                                         @endif

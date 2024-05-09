@@ -21,6 +21,12 @@
 </head>
 <body class="d-flex flex-column h-full">
     <div class="container">
+        <div class="card my-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ env('NOTA_TITLE' ?? 'LARAVEL') }}</h5>
+                <p class="card-text">{{ env('NOTA_DESCRIPTION' ?? 'LARAVEL DESC') }}</p>
+            </div>
+        </div>
         <div class="card my-5">
             <div class="card-header bg-primary text-white">Receipt Transaction</div>
             <div class="card-body">
