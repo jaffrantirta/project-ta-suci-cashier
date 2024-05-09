@@ -7,7 +7,9 @@
             @if(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
-            <a href="{{ route('stock.create') }}" class="btn btn-primary mb-2">Tambah</a>
+            @can('stock.create')
+                <a href="{{ route('stock.create') }}" class="btn btn-primary mb-2">Tambah</a>
+            @endcan
             <div class="card">
                 <div class="card-header">Stok barang</div>
 

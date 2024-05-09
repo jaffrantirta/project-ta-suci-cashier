@@ -100,7 +100,7 @@
                         </li>
                         @endcan
 
-                        @can('stock.create')
+                        @can('stock.view')
                         <li class="nav-item bg-dark rounded" id="stok-menu">
                             <a class="nav-link text-light d-flex justify-content-between rounded {{ Route::currentRouteName() === 'stock.index' ? 'bg-primary' : '' }}" href="#" onclick="toggleSubMenu('stok-submenu')">
                                 <div><i class="fas fa-cubes-stacked me-2"></i>Stok</div>
