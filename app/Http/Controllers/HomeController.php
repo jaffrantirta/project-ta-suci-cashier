@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stock;
+use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -32,6 +34,8 @@ class HomeController extends Controller
             ->with('item')
             ->get();
 
-        return view('home', compact('bestSeller'));
+        $transactionsToday = Transaction::whereDate('created_at', Carbon::today())->get();
+
+        return view('home', compact('bestSeller', 'transactionsToday'));
     }
 }

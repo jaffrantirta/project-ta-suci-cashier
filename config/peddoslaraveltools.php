@@ -4,23 +4,23 @@ return [
         // item
         [
             'name' => 'item.create',
-            'roles' => ['owner']
+            'roles' => ['owner', 'cashier']
         ],
         [
             'name' => 'item.update',
-            'roles' => ['owner', 'operation']
+            'roles' => ['owner', 'cashier']
         ],
         [
             'name' => 'item.view',
-            'roles' => ['owner', 'operation', 'cashier']
+            'roles' => ['owner', 'cashier']
         ],
         [
             'name' => 'item.viewAny',
-            'roles' => ['owner', 'operation', 'cashier']
+            'roles' => ['owner', 'cashier']
         ],
         [
             'name' => 'item.delete',
-            'roles' => ['owner']
+            'roles' => ['owner', 'cashier']
         ],
         // user
         [
