@@ -91,12 +91,16 @@
                                     Dashboard
                                 </a>
                         </li>
+                        @can('transaction.create')
                         <li class="nav-item">
                             <a class="nav-link text-light rounded {{ Route::currentRouteName() === 'transaction.index' ? 'bg-primary' : '' }}" href="{{ route('transaction.index', ['sort' => '-created_at']) }}"><i class="fas fa-list me-2"></i>Transaksi</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light rounded {{ Route::currentRouteName() === 'transaction.create' ? 'bg-primary' : '' }}" href="{{ route('transaction.create') }}"><i class="fas fa-plus me-2"></i>Tambah Transaksi Baru</a>
                         </li>
+                        @endcan
+
+                        @can('stock.create')
                         <li class="nav-item bg-dark rounded" id="stok-menu">
                             <a class="nav-link text-light d-flex justify-content-between rounded {{ Route::currentRouteName() === 'stock.index' ? 'bg-primary' : '' }}" href="#" onclick="toggleSubMenu('stok-submenu')">
                                 <div><i class="fas fa-cubes-stacked me-2"></i>Stok</div>
@@ -118,12 +122,21 @@
                                 </li>
                             </ul>
                         </li>
+                        @endcan
+
+
+                        @can('item.create')
                         <li class="nav-item">
                             <a class="nav-link text-light rounded {{ Route::currentRouteName() === 'item.index' ? 'bg-primary' : '' }}" href="{{ route('item.index') }}"><i class="fas fa-boxes-stacked me-2"></i>Barang</a>
                         </li>
+                        @endcan
+
+                        @can('user.create')
                         <li class="nav-item">
                             <a class="nav-link text-light rounded {{ Route::currentRouteName() === 'user.index' ? 'bg-primary' : '' }}" href="{{ route('user.index') }}"><i class="fas fa-users me-2"></i>Karyawan</a>
                         </li>
+                        @endcan
+
                         <li class="nav-item">
                             <a class="nav-link text-light rounded {{ Route::currentRouteName() === 'report.index' ? 'bg-primary' : '' }}" href="{{ route('report.index') }}"><i class="fas fa-file me-2"></i>Laporan</a>
                         </li>
