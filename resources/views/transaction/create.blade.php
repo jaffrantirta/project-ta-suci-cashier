@@ -12,17 +12,23 @@
                 <div class="card-body">
                     <form action="{{ route('cart.store') }}" method="POST">
                         @csrf
+
                         <div class="row mb-3">
                             <div class="col-md-12">
                                 <!-- Item name -->
                                 <div class="form-group">
-                                    <label for="item_name">Kode Barang (SKU)</label>
-                                    <input autofocus type="text" class="form-control" id="sku" name="sku" required>
+                                    <label for="item_name">Masukan Nama Barang</label>
+                                    <select id="select2" name="sku" class="form-control">
+                                        @foreach ($items as $item)
+                                            <option value="{{ $item->sku }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-md-12 mt-1">
-                                <button type="submit" class="btn btn-primary">Tambah</button>
-                            </div>
+                        </div>
+
+                        <div class="col-md-12 mt-1">
+                            <button type="submit" class="btn btn-primary">Tambah</button>
                         </div>
                     </form>
                 </div>
@@ -37,16 +43,22 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="customer_name">Nama Pelanggan</label>
                                             <input type="text" class="form-control" id="customer_name" name="customer_name" required>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="customer_address">Alamat Pelanggan</label>
                                             <input type="text" class="form-control" id="customer_address" name="customer_address" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="customer_phone">Nomor Telepon</label>
+                                            <input type="number" class="form-control" id="customer_phone" name="customer_phone" required>
                                         </div>
                                     </div>
                                 </div>
@@ -76,6 +88,8 @@
                                         <button type="button" onclick="updateQuantity({{$item->id}})" class="btn btn-outline-secondary mx-1"><i class="fa fa-check"></i></button>
                                     </td>
                                     <td>Rp{{number_format($item->getPriceSum())}}</td>
+                                    <td><button type="button" onclick="removeItem({{ $item->id }})" class="btn btn-outline-danger"><i class="fa fa-trash"></i></button></td>
+
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -173,6 +187,31 @@
             })
             .then(() => window.location.reload())
         };
+
+
+
+
+        const removeItem = function(id) {
+            const url = '{{ route('cart.destroy', ['cart' => 'id']) }}'.replace('id', id);
+
+            fetch(url, {
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(() => window.location.reload())
+        };
+
+        function filterItems(arr, query) {
+            return arr.filter((el) => el.toLowerCase().includes(query.toLowerCase()));
+        }
+
+
+
+
 
 </script>
 

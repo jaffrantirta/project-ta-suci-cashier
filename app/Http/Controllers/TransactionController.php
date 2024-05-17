@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\PaymentMethod;
 use App\Http\Requests\TransactionStoreRequest;
 use App\Http\Requests\TransactionUpdateRequest;
+use App\Models\Item;
 use App\Models\Stock;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
@@ -26,7 +27,8 @@ class TransactionController extends Controller
     {
         return view('transaction/create', [
             'cart' => \Cart::getContent(),
-            'sub_total' => \Cart::getSubTotal()
+            'sub_total' => \Cart::getSubTotal(),
+            'items' => Item::all()
         ]);
     }
 
@@ -43,7 +45,8 @@ class TransactionController extends Controller
             'change_amount' => $request->change_amount,
             'attributes' => json_encode([
                 'customer_name' => $request->customer_name,
-                'customer_address' => $request->customer_address
+                'customer_address' => $request->customer_address,
+                'customer_phone' => $request->customer_phone
             ])
         ]);
         $cart = \Cart::getContent();

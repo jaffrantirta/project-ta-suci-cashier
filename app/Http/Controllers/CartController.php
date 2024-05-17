@@ -12,6 +12,8 @@ class CartController extends Controller
     {
         $item = Item::where('sku', $request->sku)->first();
 
+        // dd($item);
+
         if (!$item) {
             return redirect()->back()->with('error', 'Barang tidak ada');
         }
@@ -41,8 +43,8 @@ class CartController extends Controller
         return redirect()->back();
     }
 
-    public function destroy($rowId)
+    public function destroy($cart)
     {
-        \Cart::remove($rowId);
+        \Cart::remove($cart);
     }
 }
