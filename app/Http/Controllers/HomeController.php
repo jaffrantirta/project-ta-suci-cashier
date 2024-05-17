@@ -34,8 +34,7 @@ class HomeController extends Controller
             ->with('item')
             ->get();
 
-        $transactionsToday = Transaction::whereDate('created_at', Carbon::today())->get();
-
+        $transactionsToday = Transaction::whereDate('created_at', Carbon::today())->count();
         return view('home', compact('bestSeller', 'transactionsToday'));
     }
 }
