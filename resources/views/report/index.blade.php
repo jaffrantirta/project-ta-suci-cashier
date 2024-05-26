@@ -52,6 +52,20 @@
                                 </span>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label for="payment_method">Jenis Pembayaran:</label>
+                            <select class="form-control @error('payment_method') is-invalid @enderror" id="payment_method" name="payment_method">
+                                <option value="">Pilih jenis pembayaran</option>
+                                <option value="2">Transfer</option>
+                                <option value="1">Cash</option>
+                            </select>
+                            <p class="text-muted">kosongkan jika menampilkan semua metode pembayaran</p>
+                            @error('payment_method')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
 
                         <div class="mt-2 col-md-12">
                             <button type="submit" class="btn btn-primary col-md-12">Generate</button>

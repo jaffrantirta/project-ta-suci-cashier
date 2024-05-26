@@ -29,7 +29,11 @@ class ReportController extends Controller
             'from_date' => 'required|date|before_or_equal:today',
             'to_date' => 'required|date|after_or_equal:from_date',
             'type' => 'required',
+            'payment_method' => 'nullable',
         ]);
+
+        // dd($request->payment_method);
+
         if ($request->type == 'stock') {
             $data = Stock::whereBetween('created_at', [Carbon::parse($request->from_date)->startOfDay(), Carbon::parse($request->to_date)->endOfDay()])
                 ->where('change_amount', '>', 0)
@@ -49,6 +53,9 @@ class ReportController extends Controller
                 ->get();
         } else {
             $data = Transaction::whereBetween('created_at', [Carbon::parse($request->from_date)->startOfDay(), Carbon::parse($request->to_date)->endOfDay()])
+                ->when(!empty($request->payment_method), function ($query) use ($request) {
+                    return $query->where('payment_method', $request->payment_method);
+                })
                 ->orderBy('created_at', 'desc')
                 ->get();
         }

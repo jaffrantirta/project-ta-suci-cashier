@@ -29,8 +29,14 @@ class Transaction extends Model
 
     protected $appends = [
         'customer_name',
-        'customer_address'
+        'customer_address',
+        'payment_method_text'
     ];
+
+    public function getPaymentMethodTextAttribute()
+    {
+        return $this->attributes['payment_method'] == '1' ? 'Cash' : 'Transfer';
+    }
 
     public function getCustomerNameAttribute()
     {

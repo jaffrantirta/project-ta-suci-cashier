@@ -101,7 +101,7 @@
                     <td class="bordered-table-content">{{$d->number}}</td>
                     <td class="bordered-table-content">{{number_format($d->total_of_item)}}</td>
                     <td class="bordered-table-content">Rp{{number_format($d->total_of_amount)}}</td>
-                    <td class="bordered-table-content">{{$d->payment_method}}</td>
+                    <td class="bordered-table-content">{{$d->payment_method_text}}</td>
                 </tr>
             @endforeach
         </table>
