@@ -47,4 +47,9 @@ class CartController extends Controller
     {
         \Cart::remove($cart);
     }
+
+    public function clear()
+    {
+        \Cart::clear();
+    }
 }

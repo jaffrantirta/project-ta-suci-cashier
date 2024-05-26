@@ -135,6 +135,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-12">
+                            <button type="button" onclick="clearCart()" class="btn btn-danger">Batal</button>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
@@ -193,6 +194,20 @@
 
         const removeItem = function(id) {
             const url = '{{ route('cart.destroy', ['cart' => 'id']) }}'.replace('id', id);
+
+            fetch(url, {
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(() => window.location.reload())
+        };
+
+        const clearCart = function() {
+            const url = '{{ route('cart.clear') }}';
 
             fetch(url, {
                 method: "DELETE",

@@ -36,6 +36,7 @@ Route::resource('stock', StockController::class);
 Route::resource('item', ItemController::class);
 Route::resource('report', ReportController::class);
 Route::resource('cart', CartController::class);
+Route::delete('clear/cart', [CartController::class, 'clear'])->name('cart.clear');
 Route::resource('user', UserController::class);
 Route::resource('opname', OpnameController::class);
 
