@@ -13,6 +13,16 @@
                             @method('PUT')
                         @endif
                         <div class="form-group">
+                            <label for="number_of_invoice">Nomor Nota</label>
+                            <input type="text" class="form-control @error('number_of_invoice') is-invalid @enderror" id="number_of_invoice" name="number_of_invoice" value="{{ isset($stock) ? old('number_of_invoice') ?? $stock->number_of_invoice : '' }}" required>
+                            @error('number_of_invoice')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
                             <label for="name">Barang</label>
                             <select name="item_id" class="form-control @error('name') is-invalid @enderror">
                                 <option value="">- pilih barang -</option>

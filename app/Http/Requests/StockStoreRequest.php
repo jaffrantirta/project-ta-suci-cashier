@@ -19,6 +19,7 @@ class StockStoreRequest extends FormRequest
             'change_amount' => ['required', 'numeric'],
             'amount' => ['nullable'],
             'supplier_name' => ['required'],
+            'number_of_invoice' => ['required'],
         ];
     }
 }

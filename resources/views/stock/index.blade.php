@@ -24,35 +24,21 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Tanggal</th>
-                                <th>Kode barang</th>
                                 <th>Nama Barang</th>
                                 <th>Jumlah</th>
-                                <th>Jumlah Stok Akhir</th>
-                                <th>Satuan</th>
-                                <th>Keterangan</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($stocks as $key => $stock)
                                 <tr>
                                     <td>{{ $key+1 }}</td>
-                                    <td>{{ $stock->created_at }}</td>
-                                    <td>{{ $stock->item->sku }}</td>
                                     <td>{{ $stock->item->name }}</td>
                                     <td class="{{ $stock->change_amount > 0 ? 'text-success' : ($stock->change_amount < 0 ? 'text-danger' : '') }}">
-                                        {{ $stock->change_amount }}
+                                        {{ $stock->change_amount }} {{ $stock->item->unit_of_stock }}
                                     </td>
-                                    <td>{{ $stock->amount }}</td>
-                                    <td>{{ $stock->item->unit_of_stock }}</td>
                                     <td>
-                                        @if ($stock->change_amount > 0)
-                                            <div class="badge text-bg-success">Stok Masuk</div>
-                                            <div>supplier : {{ $stock->supplier_name }}</div>
-                                            <a class="btn btn-sm btn-secondary mt-2" href="{{ route('stock.show', ['stock' => $stock->id]) }}">{{ $stock->number_of_invoice }}</a>
-                                        @elseif ($stock->change_amount < 0)
-                                        <div class="badge text-bg-danger">Stok Keluar</div>
-                                        @endif
+                                        <a class="btn btn-sm btn-secondary mt-2" href="{{ route('stock.show', ['stock' => $stock->id]) }}">Lihat</a>
                                     </td>
                                 </tr>
                             @endforeach

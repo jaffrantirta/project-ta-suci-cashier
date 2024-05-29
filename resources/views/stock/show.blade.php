@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="card my-5">
-            <div class="card-header bg-primary text-white">Receipt Transaction</div>
+            <div class="card-header bg-primary text-white">Transaksi</div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
@@ -59,10 +59,10 @@
         </div>
     </div>
 
-    <script>
+    {{-- <script>
         // This script will trigger the print dialog once the page has loaded
         window.onload = function() {
             window.print(); // Opens the print dialog
         };
-    </script>
+    </script> --}}
 </body>

@@ -27,7 +27,7 @@ class StockController extends Controller
 
     public function store(StockStoreRequest $request)
     {
-        Stock::create(array_merge($request->validated(), ['number_of_invoice' => $this->generateInvoiceNumber()]));
+        Stock::create($request->validated());
         return redirect('stock')->with('success', 'Stok telah disismpan');
     }
 
