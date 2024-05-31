@@ -62,22 +62,24 @@
     <table class="full-table bordered-table">
         <tr>
             <th class="bordered-table-header">No.</th>
-            <th class="bordered-table-header">Tanggal</th>
             <th class="bordered-table-header">Kode Barang</th>
             <th class="bordered-table-header">Nama Barang</th>
             <th class="bordered-table-header">Fisik</th>
             <th class="bordered-table-header">Selisih</th>
             <th class="bordered-table-header">Satuan</th>
+            <th class="bordered-table-header">Tanggal Input</th>
+            <th class="bordered-table-header">Tanggal Opname</th>
         </tr>
         @foreach ($data as $key => $d)
             <tr>
                 <td class="bordered-table-content">{{$key+1}}</td>
-                <td class="bordered-table-content">{{\Carbon\Carbon::parse($d->created_at)->format('d M Y H:m:i')}}</td>
                 <td class="bordered-table-content">{{$d->item->sku}}</td>
                 <td class="bordered-table-content">{{$d->item->name}}</td>
                 <td class="bordered-table-content">{{$d->real_stock}}</td>
                 <td class="bordered-table-content">{{$d->diff_stock}}</td>
                 <td class="bordered-table-content">{{$d->item->unit_of_stock}}</td>
+                <td class="bordered-table-content">{{\Carbon\Carbon::parse($d->created_at)->format('d M Y H:m:i')}}</td>
+                <td class="bordered-table-content">{{\Carbon\Carbon::parse($d->doing_at)->format('d M Y')}}</td>
             </tr>
         @endforeach
     </table>

@@ -28,6 +28,8 @@
                                 <th>Satuan</th>
                                 <th>Fisik</th>
                                 <th>Selisih</th>
+                                <th>Dilakukan pada</th>
+                                <th>Diinput pada</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,6 +41,8 @@
                                     <td>{{ $opname->item->unit_of_stock }}</td>
                                     <td>{{ $opname->real_stock }}</td>
                                     <td>{{ $opname->diff_stock }}</td>
+                                    <td>{{ $opname->doing_at }}</td>
+                                    <td>{{ $opname->created_at }}</td>
 
                                 </tr>
                             @endforeach

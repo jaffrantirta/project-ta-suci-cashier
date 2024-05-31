@@ -14,6 +14,7 @@ class Opname extends Model
         'item_id',
         'real_stock',
         'diff_stock',
+        'doing_at'
     ];
 
     public function item(): BelongsTo

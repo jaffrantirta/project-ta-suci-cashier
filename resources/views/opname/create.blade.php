@@ -38,7 +38,17 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="doing_at">Tangga opname dilakukan</label>
+                            <input type="date" class="form-control @error('doing_at') is-invalid @enderror" id="doing_at" name="doing_at" step="0.01" value="{{ isset($opname) ? old('doing_at') ?? $opname->doing_at : '' }}" required>
+                            @error('doing_at')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
 
                         <button type="submit" class="btn btn-primary mt-2">Submit</button>
                     </form>
