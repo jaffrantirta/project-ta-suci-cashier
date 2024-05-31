@@ -15,9 +15,9 @@ class StockStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'item_id' => ['required'],
-            'change_amount' => ['required', 'numeric'],
-            'amount' => ['nullable'],
+            'data.*.item_id' => ['required'],
+            'data.*.change_amount' => ['required', 'numeric'],
+            'data.*.amount' => ['nullable'],
             'supplier_name' => ['required'],
             'number_of_invoice' => ['required'],
         ];

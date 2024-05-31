@@ -27,8 +27,19 @@ class StockController extends Controller
 
     public function store(StockStoreRequest $request)
     {
-        Stock::create($request->validated());
-        return redirect('stock')->with('success', 'Stok telah disismpan');
+        $data = $request->validated();
+
+        foreach ($data['data'] as $stockData) {
+            Stock::create([
+                'item_id' => $stockData['item_id'],
+                'supplier_name' => $data['supplier_name'],
+                'change_amount' => $stockData['change_amount'],
+                'amount' => $stockData['amount'] ?? null,
+                'number_of_invoice' => $data['number_of_invoice'],
+            ]);
+        }
+
+        return redirect('stock')->with('success', 'Stok telah disimpan');
     }
 
     public function show($stock, StockQuery $query)
