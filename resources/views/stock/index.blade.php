@@ -26,6 +26,7 @@
                                 <th>No.</th>
                                 <th>Nama Barang</th>
                                 <th>Jumlah</th>
+                                <th>Jumlah total</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -37,6 +38,7 @@
                                     <td class="{{ $stock->change_amount > 0 ? 'text-success' : ($stock->change_amount < 0 ? 'text-danger' : '') }}">
                                         {{ $stock->change_amount }} {{ $stock->item->unit_of_stock }}
                                     </td>
+                                    <td>{{ $stock->amount }}</td>
                                     <td>
                                         <a class="btn btn-sm btn-secondary mt-2" href="{{ route('stock.show', ['stock' => $stock->id]) }}">Lihat</a>
                                     </td>
