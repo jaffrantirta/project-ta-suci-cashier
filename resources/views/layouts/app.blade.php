@@ -150,7 +150,7 @@
 
                         @can('opname.create')
                         <li class="nav-item">
-                            <a class="nav-link text-light rounded {{ Route::currentRouteName() === 'opname.index' ? 'bg-primary' : '' }}" href="{{ route('opname.index') }}"><i class="fas fa-cubes me-2"></i>Stok Opname</a>
+                            <a class="nav-link text-light rounded {{ Route::currentRouteName() === 'opname.index' ? 'bg-primary' : '' }}" href="{{ route('opname.index', ['sort' => '-created_at']) }}"><i class="fas fa-cubes me-2"></i>Stok Opname</a>
                         </li>
                         @endcan
 

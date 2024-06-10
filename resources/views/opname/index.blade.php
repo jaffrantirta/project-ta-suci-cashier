@@ -43,6 +43,7 @@
                                     <td>{{ $opname->diff_stock }}</td>
                                     <td>{{ $opname->doing_at }}</td>
                                     <td>{{ $opname->created_at }}</td>
+                                    <td>{{ $opname->comment }}</td>
 
                                 </tr>
                             @endforeach

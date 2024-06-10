@@ -50,6 +50,16 @@
                             @enderror
                         </div>
 
+                        <div class="form-group">
+                            <label for="comment">Keterangan</label>
+                            <input type="text" class="form-control @error('comment') is-invalid @enderror" id="comment" name="comment" step="0.01" value="{{ isset($opname) ? old('comment') ?? $opname->comment : '' }}" required>
+                            @error('comment')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
                         <button type="submit" class="btn btn-primary mt-2">Submit</button>
                     </form>
                 </div>

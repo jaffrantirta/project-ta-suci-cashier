@@ -18,7 +18,8 @@ class OpnameStoreRequest extends FormRequest
             'sku' => ['required', 'exists:items,sku'],
             'real_stock' => ['required', 'integer', 'min:0'],
             'diff_stock' => ['required', 'integer', 'min:0'],
-            'doing_at' => ['required', 'date', 'before_or_equal:today']
+            'doing_at' => ['required', 'date', 'before_or_equal:today'],
+            'comment' => ['nullable', 'string'],
         ];
     }
 }
