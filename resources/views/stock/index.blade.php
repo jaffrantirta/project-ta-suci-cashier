@@ -26,7 +26,7 @@
                                 <th>No.</th>
                                 <th>Nama Barang</th>
                                 {{-- <th>Jumlah</th> --}}
-                                <th>Jumlah total</th>
+                                <th>Jumlah akhir</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -40,7 +40,7 @@
                                     </td> --}}
                                     <td>{{ $stock->item->stocks[0]?->amount }}</td>
                                     <td>
-                                        <a class="btn btn-sm btn-secondary mt-2" href="{{ route('stock.showbyitem', ['filter[type]' => '>', 'sort' => '-created_at', 'include[]' => 'item', 'filter[item_id]' => $stock->item->id]) }}">Lihat</a>
+                                        <a class="btn btn-sm btn-secondary mt-2" href="{{ route('stock.showbyitem', ['filter[type]' => $type, 'sort' => '-created_at', 'include[]' => 'item', 'filter[item_id]' => $stock->item->id]) }}">Lihat</a>
                                     </td>
                                 </tr>
                             @endforeach
