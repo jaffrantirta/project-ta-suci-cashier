@@ -33,6 +33,7 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::resource('transaction', TransactionController::class);
 Route::resource('stock', StockController::class);
+Route::get('/stockshowbyitem', [StockController::class, 'showByItem'])->name('stock.showbyitem');
 Route::resource('item', ItemController::class);
 Route::resource('report', ReportController::class);
 Route::resource('cart', CartController::class);

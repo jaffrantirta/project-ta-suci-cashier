@@ -8,12 +8,22 @@ use App\Models\Item;
 use App\Models\Stock;
 use App\Queries\StockQuery;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class StockController extends Controller
 {
     public function index(StockQuery $stockQuery)
     {
+        // return Stock::select('item_id', DB::raw('max(created_at) as created_at'))->groupBy('item_id')->with('item.stocks')->latest()->get();
         return view('stock/index', [
+            // 'stocks' => $stockQuery->includes()->filterSortPaginateWithAppend()
+            'stocks' => $stockQuery->select('item_id', DB::raw('max(created_at) as created_at'))->groupBy('item_id')->with('item.stocks')->latest()->paginate()
+        ]);
+    }
+
+    public function showByItem(StockQuery $stockQuery)
+    {
+        return view('stock/showbyitem', [
             'stocks' => $stockQuery->includes()->filterSortPaginateWithAppend()
         ]);
     }
