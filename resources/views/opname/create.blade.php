@@ -13,18 +13,13 @@
                             @method('PUT')
                         @endif
                         <div class="form-group">
-                            <label for="sku">Kode Barang/SKU</label>
-                            <input type="text" class="form-control @error('sku') is-invalid @enderror" id="sku" name="sku" value="{{ isset($opname) ? old('sku') ?? $opname->sku : '' }}" required>
+                            <label for="sku">Barang</label>
+                            <select class="form-control @error('sku') is-invalid @enderror" id="sku" name="sku" required>
+                                @foreach ($items as $item)
+                                    <option value="{{ $item->sku }}" {{ isset($opname) && $opname->sku == $item->sku ? 'selected' : '' }}>{{ $item->sku }}</option>
+                                @endforeach
+                            </select>
                             @error('sku')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="real_stock">Fisik</label>
-                            <input type="number" class="form-control @error('real_stock') is-invalid @enderror" id="real_stock" name="real_stock" value="{{ isset($opname) ? old('real_stock') ?? $opname->real_stock : '' }}" required>
-                            @error('real_stock')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

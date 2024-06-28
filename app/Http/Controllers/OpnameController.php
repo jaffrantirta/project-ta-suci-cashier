@@ -19,13 +19,15 @@ class OpnameController extends Controller
 
     public function create()
     {
-        return view('opname/create');
+        return view('opname/create', [
+            'items' => Item::all(),
+        ]);
     }
 
     public function store(OpnameStoreRequest $request)
     {
         $item = Item::where('sku', $request->input('sku'))->firstOrFail();
-        $item->opname()->create($request->validated());
+        $item->opname()->create(array_merge($request->validated(), ['real_stock' => $item->stocks()->latest()->first()->amount]));
         return redirect('opname')->with('success', 'Stok opname ditambahkan');
     }
 
