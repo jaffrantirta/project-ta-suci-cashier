@@ -40,11 +40,11 @@
                         <div class="form-group">
                             <label for="type">Jenis Laporan:</label>
                             <select class="form-control @error('type') is-invalid @enderror" id="type" name="type" required>
-                                @role('super-admin|cashier')
+                                @role('owner|cashier')
                                 <option value="">Pilih jenis laporan</option>
                                 <option value="sales">Laporan Penjualan</option>
                                 @endrole
-                                @role('super-admin|operation')
+                                @role('owner|operation')
                                 <option value="stock">Laporan Stok Masuk</option>
                                 <option value="stockout">Laporan Stok Keluar</option>
                                 <option value="opname">Laporan Stok Opname</option>

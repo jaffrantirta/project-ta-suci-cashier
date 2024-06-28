@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
 use App\Models\Stock;
 use App\Models\Transaction;
 use Carbon\Carbon;
@@ -34,7 +35,16 @@ class HomeController extends Controller
             ->with('item')
             ->get();
 
+        $runningLowStock = [];
+        $items = Item::all();
+        foreach ($items as $key => $value) {
+            if ($value->stock?->amount < 20) {
+                array_push($runningLowStock, $value);
+            }
+        }
+
         $transactionsToday = Transaction::whereDate('created_at', Carbon::today())->count();
-        return view('home', compact('bestSeller', 'transactionsToday'));
+        $transactionsYesterday = Transaction::whereDate('created_at', Carbon::yesterday())->count();
+        return view('home', compact('bestSeller', 'transactionsToday', 'runningLowStock', 'transactionsYesterday'));
     }
 }

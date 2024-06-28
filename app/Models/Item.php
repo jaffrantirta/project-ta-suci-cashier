@@ -17,6 +17,10 @@ class Item extends Model
         'unit_of_stock',
     ];
 
+    protected $appends = [
+        'stock',
+    ];
+
     public function getStockAttribute()
     {
         return $this->stocks()->latest()->first();

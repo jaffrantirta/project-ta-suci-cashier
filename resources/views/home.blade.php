@@ -4,15 +4,71 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">Transaksi Hari Ini</div>
+            <div class="d-flex justify-content-start mb-3">
+                <button type="button" class="btn btn-primary me-3" onclick="showTransactions('today')">Hari ini</button>
+                <button type="button" class="btn btn-primary" onclick="showTransactions('yesterday')">Kemarin</button>
+            </div>
 
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <strong>{{ $transactionsToday }}</strong>
-                    </h4>
+            <div id="today-transaction">
+                <div class="card">
+                    <div class="card-header">Transaksi Hari Ini</div>
+
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <strong>{{ $transactionsToday }}</strong>
+                        </h4>
+                    </div>
                 </div>
             </div>
+
+            <div id="yesterday-transaction" style="display: none;">
+                <div class="card">
+                    <div class="card-header">Transaksi Kemarin</div>
+
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <strong>{{ $transactionsYesterday }}</strong>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                window.onload = function() {
+                    document.getElementById('today-transaction').style.display = 'block';
+                }
+
+                function showTransactions(type) {
+                    document.getElementById('today-transaction').style.display = 'none';
+                    document.getElementById('yesterday-transaction').style.display = 'none';
+
+                    document.getElementById(type + '-transaction').style.display = 'block';
+                }
+            </script>
+
+            @if ($runningLowStock && count($runningLowStock) > 0)
+            <div class="card mt-3">
+                <div class="card-header">Barang menipis</div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nama Barang</th>
+                                <th>Jumlah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($runningLowStock as $item)
+                            <tr>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ abs($item->stock?->amount) }} {{ $item->unit_of_stock }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @endif
 
             <div class="card mt-3">
                 <div class="card-header">Barang terlaris</div>
