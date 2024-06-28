@@ -13,7 +13,8 @@
                 <div class="card-body">
                     <form action="{{ route('transaction.index') }}" method="GET" class="mb-3">
                         <div class="input-group">
-                            <input type="search" id="searchInput" class="form-control" placeholder="Cari berdasarkan kode nota..." name="filter[number]">
+                            <input type="text" id="searchInput" class="form-control" placeholder="Kode nota..." name="filter[number]">
+                            <input type="date" id="dateSearchInput" class="form-control" placeholder="Tanggal..." name="filter[created_at]">
                             <button type="submit" class="btn btn-outline-secondary">Search</button>
                         </div>
                     </form>
