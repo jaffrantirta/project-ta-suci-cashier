@@ -92,8 +92,10 @@
                 <th class="bordered-table-header">No.</th>
                 <th class="bordered-table-header">Tanggal</th>
                 <th class="bordered-table-header">Nomor Nota</th>
-                <th class="bordered-table-header">Total barang</th>
+                <th class="bordered-table-header">Nama Pembeli</th>
                 <th class="bordered-table-header">Barang</th>
+                <th class="bordered-table-header">Qty</th>
+                <th class="bordered-table-header">Harga</th>
                 <th class="bordered-table-header">Total biaya</th>
                 <th class="bordered-table-header">Jenis Pembayaran</th>
             </tr>
@@ -102,11 +104,26 @@
                     <td class="bordered-table-content">{{$key+1}}</td>
                     <td class="bordered-table-content">{{\Carbon\Carbon::parse($d->created_at)->format('d M Y H:m:i')}}</td>
                     <td class="bordered-table-content">{{$d->number}}</td>
-                    <td class="bordered-table-content">{{number_format($d->total_of_item)}}</td>
+                    <td class="bordered-table-content">{{$d->number}}</td>
                     <td class="bordered-table-content">
                         <ul>
                             @foreach ($d->transaction_details as $i)
-                                <li>{{$i->item_name}} x {{$i->amount}} = Rp{{number_format($i->total)}}</li>
+                                {{-- <li>{{$i->item_name}}</li> --}}
+                                {{$i->item_name}}
+                            @endforeach
+                        </ul>
+                    </td>
+                    <td class="bordered-table-content">
+                        <ul>
+                            @foreach ($d->transaction_details as $i)
+                                <li>{{$i->amount}}</li>
+                            @endforeach
+                        </ul>
+                    </td>
+                    <td class="bordered-table-content">
+                        <ul>
+                            @foreach ($d->transaction_details as $i)
+                                <li>Rp{{number_format($i->item_price)}}</li>
                             @endforeach
                         </ul>
                     </td>
@@ -125,6 +142,9 @@
 <style>
     .page_break {
         page-break-before: always;
+    }
+    td {
+        font-size: 0.7em;
     }
 
     footer {
