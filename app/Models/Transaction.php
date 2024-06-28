@@ -35,19 +35,48 @@ class Transaction extends Model
 
     public function getPaymentMethodTextAttribute()
     {
+        if (!isset($this->attributes['payment_method'])) {
+            return null;
+        }
         return $this->attributes['payment_method'] == '1' ? 'Cash' : 'Transfer';
     }
 
     public function getCustomerNameAttribute()
     {
+        // Check if 'attributes' key exists and is not null
+        if (!isset($this->attributes['attributes'])) {
+            return null;
+        }
+
+        // Decode JSON safely
         $attributes = json_decode($this->attributes['attributes'], true);
-        return $attributes['customer_name'] ?? null;
+
+        // Ensure decoding was successful and 'customer_name' exists
+        if (json_last_error() === JSON_ERROR_NONE && isset($attributes['customer_name'])) {
+            return $attributes['customer_name'];
+        }
+
+        // Return null if JSON decoding fails or key is missing
+        return null;
     }
 
     public function getCustomerAddressAttribute()
     {
+        // Check if 'attributes' key exists and is not null
+        if (!isset($this->attributes['attributes'])) {
+            return null;
+        }
+
+        // Decode JSON safely
         $attributes = json_decode($this->attributes['attributes'], true);
-        return $attributes['customer_address'] ?? null;
+
+        // Ensure decoding was successful and 'customer_address' exists
+        if (json_last_error() === JSON_ERROR_NONE && isset($attributes['customer_address'])) {
+            return $attributes['customer_address'];
+        }
+
+        // Return null if JSON decoding fails or key is missing
+        return null;
     }
 
     public function user(): BelongsTo

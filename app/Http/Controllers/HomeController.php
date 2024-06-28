@@ -11,23 +11,14 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
+        // Best seller logic
         $bestSeller = Stock::where('change_amount', '<', 0)
             ->select('item_id', DB::raw('SUM(change_amount) as quantity'))
             ->groupBy('item_id')
@@ -35,6 +26,10 @@ class HomeController extends Controller
             ->with('item')
             ->get();
 
+        $bestSellerNames = $bestSeller->pluck('item.name');
+        $bestSellerQuantities = $bestSeller->pluck('quantity');
+
+        // Running low stock logic
         $runningLowStock = [];
         $items = Item::all();
         foreach ($items as $key => $value) {
@@ -43,8 +38,37 @@ class HomeController extends Controller
             }
         }
 
+        // Transactions today and yesterday
         $transactionsToday = Transaction::whereDate('created_at', Carbon::today())->count();
         $transactionsYesterday = Transaction::whereDate('created_at', Carbon::yesterday())->count();
-        return view('home', compact('bestSeller', 'transactionsToday', 'runningLowStock', 'transactionsYesterday'));
+
+        // Monthly sales data for the current year
+        $monthlySales = Transaction::select(
+            DB::raw('MONTHNAME(created_at) as month'),
+            DB::raw('COUNT(*) as sales')
+        )
+            ->whereYear('created_at', Carbon::now()->year)
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get()
+            ->keyBy('month')
+            ->toArray();
+
+        // Initialize an array for monthly sales data
+        // $monthlySalesData = ['January'];
+        foreach ($monthlySales as $month => $data) {
+            $monthlySalesData[$data['month']] = $data['sales'];
+        }
+
+        // return $monthlySalesData;
+
+        return view('home', compact(
+            'bestSellerNames',
+            'bestSellerQuantities',
+            'transactionsToday',
+            'runningLowStock',
+            'transactionsYesterday',
+            'monthlySalesData'
+        ));
     }
 }
