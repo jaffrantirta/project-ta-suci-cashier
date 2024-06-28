@@ -16,7 +16,7 @@
                             <label for="sku">Barang</label>
                             <select class="form-control @error('sku') is-invalid @enderror" id="sku" name="sku" required>
                                 @foreach ($items as $item)
-                                    <option value="{{ $item->sku }}" {{ isset($opname) && $opname->sku == $item->sku ? 'selected' : '' }}>{{ $item->sku }}</option>
+                                    <option value="{{ $item->sku }}" {{ isset($opname) && $opname->sku == $item->sku ? 'selected' : '' }}>{{ $item->name }}</option>
                                 @endforeach
                             </select>
                             @error('sku')

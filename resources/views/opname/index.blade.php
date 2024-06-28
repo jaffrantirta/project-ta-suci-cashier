@@ -7,6 +7,20 @@
             @if(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
+
+            @if(session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <a href="{{ route('opname.create') }}" class="btn btn-primary mb-2"><i class="fas fa-plus"></i> Tambah</a>
             <div class="card">
                 <div class="card-header">Stok Opname</div>

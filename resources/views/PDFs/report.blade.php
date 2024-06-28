@@ -104,7 +104,7 @@
                     <td class="bordered-table-content">{{$key+1}}</td>
                     <td class="bordered-table-content">{{\Carbon\Carbon::parse($d->created_at)->format('d M Y H:m:i')}}</td>
                     <td class="bordered-table-content">{{$d->number}}</td>
-                    <td class="bordered-table-content">{{$d->number}}</td>
+                    <td class="bordered-table-content">{{$d->customer_name}}</td>
                     <td class="bordered-table-content">
                         <ul>
                             @foreach ($d->transaction_details as $i)

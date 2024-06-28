@@ -6,7 +6,9 @@ use App\Http\Requests\OpnameStoreRequest;
 use App\Http\Requests\OpnameUpdateRequest;
 use App\Models\Item;
 use App\Models\Opname;
+use App\Models\Stock;
 use App\Queries\OpnameQuery;
+use Illuminate\Support\Facades\DB;
 
 class OpnameController extends Controller
 {
@@ -27,7 +29,20 @@ class OpnameController extends Controller
     public function store(OpnameStoreRequest $request)
     {
         $item = Item::where('sku', $request->input('sku'))->firstOrFail();
-        $item->opname()->create(array_merge($request->validated(), ['real_stock' => $item->stocks()->latest()->first()->amount]));
+        if ($request->diff_stock > $item->stocks()->latest()->first()->amount) {
+            return redirect('opname')->with('error', 'Stok opname melebihi stok pada sistem');
+        }
+        $real_stock = $item->stocks()->latest()->first()->amount - $request->diff_stock;
+        // return $real_stock;
+        DB::beginTransaction();
+        $item->opname()->create(array_merge($request->validated(), ['real_stock' => $real_stock]));
+        Stock::create([
+            'item_id' => $item->id,
+            'change_amount' => -$request->diff_stock,
+            'amount' => 0,
+            'supplier_name' => 'note: opname (' . $request->comment . ')'
+        ]);
+        DB::commit();
         return redirect('opname')->with('success', 'Stok opname ditambahkan');
     }
 
