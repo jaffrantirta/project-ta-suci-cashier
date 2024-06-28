@@ -93,6 +93,7 @@
                 <th class="bordered-table-header">Tanggal</th>
                 <th class="bordered-table-header">Nomor Nota</th>
                 <th class="bordered-table-header">Total barang</th>
+                <th class="bordered-table-header">Barang</th>
                 <th class="bordered-table-header">Total biaya</th>
                 <th class="bordered-table-header">Jenis Pembayaran</th>
             </tr>
@@ -102,6 +103,13 @@
                     <td class="bordered-table-content">{{\Carbon\Carbon::parse($d->created_at)->format('d M Y H:m:i')}}</td>
                     <td class="bordered-table-content">{{$d->number}}</td>
                     <td class="bordered-table-content">{{number_format($d->total_of_item)}}</td>
+                    <td class="bordered-table-content">
+                        <ul>
+                            @foreach ($d->transaction_details as $i)
+                                <li>{{$i->item_name}} x {{$i->amount}} = Rp{{number_format($i->total)}}</li>
+                            @endforeach
+                        </ul>
+                    </td>
                     <td class="bordered-table-content">Rp{{number_format($d->total_of_amount)}}</td>
                     <td class="bordered-table-content">{{$d->payment_method_text}}</td>
                 </tr>

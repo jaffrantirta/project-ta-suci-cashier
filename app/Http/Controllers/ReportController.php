@@ -57,6 +57,7 @@ class ReportController extends Controller
                     return $query->where('payment_method', $request->payment_method);
                 })
                 ->orderBy('created_at', 'desc')
+                ->with('transaction_details.item')
                 ->get();
         }
         // dd(Opname::whereBetween('created_at', [$request->from_date, $request->to_date])->get());
