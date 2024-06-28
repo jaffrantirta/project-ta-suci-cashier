@@ -24,7 +24,7 @@ class ItemController extends Controller
 
     public function store(ItemStoreRequest $request)
     {
-        Item::create($request->validated());
+        Item::create(array_merge($request->validated(), ['sku' => random_int(100000, 999999)]));
         return redirect('item')->with('success', 'Item created successfully.');
     }
 
