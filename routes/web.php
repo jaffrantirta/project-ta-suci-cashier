@@ -30,6 +30,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::post('/fetch-transactions-by-date', [HomeController::class, 'fetchTransactionsByDate'])->name('fetch-transactions-by-date');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::resource('transaction', TransactionController::class);
 Route::resource('stock', StockController::class);

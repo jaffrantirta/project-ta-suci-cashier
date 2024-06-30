@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Item;
@@ -32,9 +31,9 @@ class HomeController extends Controller
         // Running low stock logic
         $runningLowStock = [];
         $items = Item::all();
-        foreach ($items as $key => $value) {
-            if ($value->stock?->amount < 20) {
-                array_push($runningLowStock, $value);
+        foreach ($items as $item) {
+            if ($item->stock?->amount < 20) {
+                $runningLowStock[] = $item;
             }
         }
 
@@ -54,13 +53,10 @@ class HomeController extends Controller
             ->keyBy('month')
             ->toArray();
 
-        // Initialize an array for monthly sales data
-        // $monthlySalesData = ['January'];
+        $monthlySalesData = [];
         foreach ($monthlySales as $month => $data) {
             $monthlySalesData[$data['month']] = $data['sales'];
         }
-
-        // return $monthlySalesData;
 
         return view('home', compact(
             'bestSellerNames',
@@ -70,5 +66,16 @@ class HomeController extends Controller
             'transactionsYesterday',
             'monthlySalesData'
         ));
+    }
+
+    public function fetchTransactionsByDate(Request $request)
+    {
+        $date = $request->input('date');
+        $transactionsCount = Transaction::whereDate('created_at', $date)->count();
+
+        return response()->json([
+            'date' => $date,
+            'transactionsCount' => $transactionsCount
+        ]);
     }
 }

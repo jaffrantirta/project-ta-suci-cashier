@@ -4,43 +4,67 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="d-flex justify-content-start mb-3">
-                <button type="button" class="btn btn-primary me-3" onclick="showTransactions('today')">Hari ini</button>
-                <button type="button" class="btn btn-primary" onclick="showTransactions('yesterday')">Kemarin</button>
-            </div>
-
-            <div id="today-transaction">
-                <div class="card">
-                    <div class="card-header">Transaksi Hari Ini</div>
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <strong>{{ $transactionsToday }}</strong>
-                        </h4>
+            <div class="d-flex flex-wrap justify-content-start mb-3">
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-primary me-3" onclick="showTransactions('today')">Hari ini</button>
+                    <button type="button" class="btn btn-primary" onclick="showTransactions('yesterday')">Kemarin</button>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group mb-3">
+                        <input type="date" id="dateFilterInput" class="form-control" placeholder="Filter Tanggal" onchange="filterDate()">
+                        <button class="btn btn-outline-secondary" type="button" onclick="filterDate()">Filter</button>
                     </div>
                 </div>
             </div>
 
-            <div id="yesterday-transaction" style="display: none;">
-                <div class="card">
-                    <div class="card-header">Transaksi Kemarin</div>
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            <strong>{{ $transactionsYesterday }}</strong>
-                        </h4>
-                    </div>
+            <div id="transactions" class="card">
+                <div class="card-header" id="transactions-header">Transaksi Hari Ini</div>
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <strong id="transactions-count">{{ $transactionsToday }}</strong>
+                    </h4>
                 </div>
             </div>
 
             <script>
-                window.onload = function() {
-                    document.getElementById('today-transaction').style.display = 'block';
+                function updateTransactionsHeaderAndCount(date, count) {
+                    document.getElementById('transactions-header').innerText = `Transaksi pada ${date}`;
+                    document.getElementById('transactions-count').innerText = count;
                 }
 
                 function showTransactions(type) {
-                    document.getElementById('today-transaction').style.display = 'none';
-                    document.getElementById('yesterday-transaction').style.display = 'none';
+                    let date = new Date();
+                    if (type === 'today') {
+                        date = new Date();
+                    } else if (type === 'yesterday') {
+                        date.setDate(date.getDate() - 1);
+                    }
 
-                    document.getElementById(type + '-transaction').style.display = 'block';
+                    let formattedDate = date.toISOString().split('T')[0];
+                    fetchTransactions(formattedDate);
+                }
+
+                function filterDate() {
+                    let selectedDate = document.getElementById('dateFilterInput').value;
+                    if (selectedDate) {
+                        fetchTransactions(selectedDate);
+                    }
+                }
+
+                function fetchTransactions(date) {
+                    fetch('{{ route("fetch-transactions-by-date") }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({ date: date })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        updateTransactionsHeaderAndCount(data.date, data.transactionsCount);
+                    })
+                    .catch(error => console.error('Error fetching transactions:', error));
                 }
             </script>
 
@@ -134,7 +158,6 @@
         var monthlySalesChart = new Chart(monthlySalesCtx, {
             type: 'line',
             data: {
-                // labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                 datasets: [{
                     label: 'Monthly Sales',
                     data: monthlySalesData,
