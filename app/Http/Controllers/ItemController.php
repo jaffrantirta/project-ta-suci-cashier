@@ -24,8 +24,17 @@ class ItemController extends Controller
 
     public function store(ItemStoreRequest $request)
     {
-        Item::create(array_merge($request->validated(), ['sku' => random_int(100000, 999999)]));
+        Item::create(array_merge($request->validated(), ['sku' => $this->generateItemId()]));
         return redirect('item')->with('success', 'Item created successfully.');
+    }
+
+    protected function generateItemId()
+    {
+        $latestItem = Item::orderBy('id', 'desc')->first();
+        $latestItemId = $latestItem ? $latestItem->id : 0;
+        $latestItemId += 1;
+        $itemId = str_pad($latestItemId, 4, '0', STR_PAD_LEFT);
+        return 'BRG' . $itemId;
     }
 
     public function show($item, ItemQuery $query)
