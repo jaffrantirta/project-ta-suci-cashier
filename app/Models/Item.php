@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 use \Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -14,7 +15,7 @@ class Item extends Model
         'sku',
         'name',
         'price',
-        'unit_of_stock',
+        'item_unit_id',
     ];
 
     protected $appends = [
@@ -39,5 +40,15 @@ class Item extends Model
     public function opname(): HasMany
     {
         return $this->hasMany(Opname::class);
+    }
+
+    /**
+     * Get the item_unit that owns the Item
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function item_unit(): BelongsTo
+    {
+        return $this->belongsTo(ItemUnit::class);
     }
 }

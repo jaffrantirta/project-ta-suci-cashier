@@ -77,7 +77,7 @@
                 <td class="bordered-table-content">{{$d->item->name}}</td>
                 <td class="bordered-table-content">{{$d->real_stock}}</td>
                 <td class="bordered-table-content">{{$d->diff_stock}}</td>
-                <td class="bordered-table-content">{{$d->item->unit_of_stock}}</td>
+                <td class="bordered-table-content">{{$d->item->item_unit->name}}</td>
                 <td class="bordered-table-content">{{\Carbon\Carbon::parse($d->created_at)->format('d M Y H:m:i')}}</td>
                 <td class="bordered-table-content">{{\Carbon\Carbon::parse($d->doing_at)->format('d M Y')}}</td>
             </tr>

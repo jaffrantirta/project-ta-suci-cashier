@@ -127,6 +127,27 @@ return [
             'name' => 'opname.delete',
             'roles' => ['operation']
         ],
+        // itemunit
+        [
+            'name' => 'itemunit.create',
+            'roles' => ['owner']
+        ],
+        [
+            'name' => 'itemunit.update',
+            'roles' => ['owner']
+        ],
+        [
+            'name' => 'itemunit.view',
+            'roles' => ['owner']
+        ],
+        [
+            'name' => 'itemunit.viewAny',
+            'roles' => ['owner']
+        ],
+        [
+            'name' => 'itemunit.delete',
+            'roles' => ['owner']
+        ],
     ],
     'max_login_attempt' => 3,
 ];

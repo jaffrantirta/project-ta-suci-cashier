@@ -36,7 +36,7 @@
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $stock->item->name }}</td>
                                     <td class="{{ $stock->change_amount > 0 ? 'text-success' : ($stock->change_amount < 0 ? 'text-danger' : '') }}">
-                                        {{ $stock->change_amount }} {{ $stock->item->unit_of_stock }}
+                                        {{ $stock->change_amount }} {{ $stock->item->item_unit->name }}
                                     </td>
                                     {{-- <td>{{ $stock->item->stocks[0]?->amount }}</td> --}}
                                     <td>

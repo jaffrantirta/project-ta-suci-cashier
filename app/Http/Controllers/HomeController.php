@@ -30,7 +30,7 @@ class HomeController extends Controller
 
         // Running low stock logic
         $runningLowStock = [];
-        $items = Item::all();
+        $items = Item::with('item_unit')->get();
         foreach ($items as $item) {
             if ($item->stock?->amount < 20) {
                 $runningLowStock[] = $item;

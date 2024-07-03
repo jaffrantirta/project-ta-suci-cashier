@@ -27,3 +27,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::apiResource('user', UserController::class);
 
 // Route::apiResource('opname', OpnameController::class);
+
+// Route::apiResource('itemunit', ItemUnitController::class);

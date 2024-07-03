@@ -31,9 +31,14 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="unit_of_stock">Nama Satuan</label>
-                            <input type="text" class="form-control @error('unit_of_stock') is-invalid @enderror" id="unit_of_stock" name="unit_of_stock" step="0.01" value="{{ isset($item) ? old('unit_of_stock') ?? $item->unit_of_stock : '' }}" required>
-                            @error('unit_of_stock')
+                            <label for="item_unit_id">Nama Satuan</label>
+                            <select class="form-control @error('item_unit_id') is-invalid @enderror" id="item_unit_id" name="item_unit_id" required>
+                                <option value="">- pilih satuan -</option>
+                                @foreach($itemunits as $itemunit)
+                                    <option value="{{ $itemunit->id }}" {{ isset($item) && $item->item_unit_id == $itemunit->id ? 'selected' : '' }}>{{ $itemunit->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('item_unit_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

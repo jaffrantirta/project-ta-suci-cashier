@@ -35,9 +35,6 @@
                                 <tr>
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $stock->item->name }}</td>
-                                    {{-- <td class="{{ $stock->change_amount > 0 ? 'text-success' : ($stock->change_amount < 0 ? 'text-danger' : '') }}">
-                                        {{ $stock->change_amount }} {{ $stock->item->unit_of_stock }}
-                                    </td> --}}
                                     <td>{{ $stock->item->stocks[0]?->amount }}</td>
                                     <td>
                                         <a class="btn btn-sm btn-secondary mt-2" href="{{ route('stock.showbyitem', ['filter[type]' => $type, 'sort' => '-created_at', 'include[]' => 'item', 'filter[item_id]' => $stock->item->id]) }}">Lihat</a>

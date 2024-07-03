@@ -52,7 +52,7 @@
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $opname->item->sku }}</td>
                                     <td>{{ $opname->item->name }}</td>
-                                    <td>{{ $opname->item->unit_of_stock }}</td>
+                                    <td>{{ $opname->item->item_unit->name }}</td>
                                     <td>{{ $opname->real_stock }}</td>
                                     <td>{{ $opname->diff_stock }}</td>
                                     <td>{{ $opname->doing_at }}</td>

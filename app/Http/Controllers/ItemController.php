@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ItemStoreRequest;
 use App\Http\Requests\ItemUpdateRequest;
 use App\Models\Item;
+use App\Models\ItemUnit;
 use App\Queries\ItemQuery;
 use Inertia\Inertia;
 
@@ -19,7 +20,9 @@ class ItemController extends Controller
 
     public function create()
     {
-        return view('item/create');
+        return view('item/create', [
+            'itemunits' => ItemUnit::all(),
+        ]);
     }
 
     public function store(ItemStoreRequest $request)
@@ -40,7 +43,8 @@ class ItemController extends Controller
     public function show($item, ItemQuery $query)
     {
         return view('item/create', [
-            'item' => $query->includes()->findAndAppend($item)
+            'item' => $query->includes()->findAndAppend($item),
+            'itemunits' => ItemUnit::all(),
         ]);
     }
 

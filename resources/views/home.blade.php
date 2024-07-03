@@ -83,7 +83,7 @@
                             @foreach($runningLowStock as $item)
                             <tr>
                                 <td>{{ $item->name }}</td>
-                                <td>{{ abs($item->stock?->amount) }} {{ $item->unit_of_stock }}</td>
+                                <td>{{ abs($item->stock?->amount) }} {{ $item->item_unit->name }}</td>
                             </tr>
                             @endforeach
                         </tbody>

@@ -2,24 +2,24 @@
 
 namespace App\Queries;
 
-use App\Models\Item;
+use App\Models\ItemUnit;
 use Dwikipeddos\PeddosLaravelTools\Queries\PaginatedQuery;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedInclude;
 use Spatie\QueryBuilder\AllowedSort;
 
-class ItemQuery extends PaginatedQuery
+class ItemUnitQuery extends PaginatedQuery
 {
     public function __construct()
     {
-        parent::__construct(Item::query());
+        parent::__construct(ItemUnit::query());
     }
 
     protected array $append = [
-        'stock',
+        // 'phone',
     ];
 
-    protected string $adminPermission = 'item.view-sensitive-data';
+    protected string $adminPermission = 'itemunit.view-sensitive-data';
 
     protected function getAllowedSorts(): array
     {
@@ -32,15 +32,13 @@ class ItemQuery extends PaginatedQuery
     {
         return [
             AllowedFilter::partial('name'),
-            AllowedFilter::partial('sku'),
-            AllowedFilter::partial('price'),
         ];
     }
 
     protected function getAllowedIncludes(): array
     {
         return [
-            AllowedInclude::relationship('item_unit'),
+            AllowedInclude::relationship('items'),
         ];
     }
 }

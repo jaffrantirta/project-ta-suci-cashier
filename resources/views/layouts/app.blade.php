@@ -142,6 +142,12 @@
                         </li>
                         @endcan
 
+                        @can('itemunit.create')
+                        <li class="nav-itemunit">
+                            <a class="nav-link text-light rounded {{ Route::currentRouteName() === 'itemunit.index' ? 'bg-primary' : '' }}" href="{{ route('itemunit.index') }}"><i class="fas fa-boxes-stacked me-2"></i>Satuan Barang</a>
+                        </li>
+                        @endcan
+
                         @can('user.create')
                         <li class="nav-item">
                             <a class="nav-link text-light rounded {{ Route::currentRouteName() === 'user.index' ? 'bg-primary' : '' }}" href="{{ route('user.index') }}"><i class="fas fa-users me-2"></i>Karyawan</a>

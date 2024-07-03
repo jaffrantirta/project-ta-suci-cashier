@@ -50,7 +50,7 @@
                             <tr>
                                 <td>{{ $stock->item->name }}</td>
                                 <td>{{ $stock->change_amount }}</td>
-                                <td>{{ $stock->item->unit_of_stock }}</td>
+                                <td>{{ $stock->item->item_unit->name }}</td>
                                 <td>{{ $stock->supplier_name }}</td>
                             </tr>
                     </tbody>
