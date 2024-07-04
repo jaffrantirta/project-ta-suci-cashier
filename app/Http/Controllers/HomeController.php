@@ -23,6 +23,7 @@ class HomeController extends Controller
             ->groupBy('item_id')
             ->orderBy('quantity', 'asc')
             ->with('item')
+            ->limit(5)
             ->get();
 
         $bestSellerNames = $bestSeller->pluck('item.name');
@@ -33,9 +34,7 @@ class HomeController extends Controller
         $items = Item::with('item_unit')->get();
         foreach ($items as $item) {
             if ($item->stock?->amount < 20) {
-                if (count($runningLowStock) < 5) {
                     $runningLowStock[] = $item;
-                }
             }
         }
 
