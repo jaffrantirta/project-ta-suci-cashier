@@ -33,7 +33,9 @@ class HomeController extends Controller
         $items = Item::with('item_unit')->get();
         foreach ($items as $item) {
             if ($item->stock?->amount < 20) {
-                $runningLowStock[] = $item;
+                if (count($runningLowStock) < 5) {
+                    $runningLowStock[] = $item;
+                }
             }
         }
 
@@ -43,7 +45,7 @@ class HomeController extends Controller
 
         // Monthly sales data for the current year
         $monthlySales = Transaction::select(
-            DB::raw('MONTHNAME(created_at) as month'),
+            DB::raw('MONTH(created_at) as month'),
             DB::raw('COUNT(*) as sales')
         )
             ->whereYear('created_at', Carbon::now()->year)
@@ -55,8 +57,9 @@ class HomeController extends Controller
 
         $monthlySalesData = [];
         foreach ($monthlySales as $month => $data) {
-            $monthlySalesData[$data['month']] = $data['sales'];
+            $monthlySalesData[$this->convertMonthNumberToName($data['month'])] = $data['sales'];
         }
+        // dd($monthlySales);
 
         return view('home', compact(
             'bestSellerNames',
@@ -66,6 +69,11 @@ class HomeController extends Controller
             'transactionsYesterday',
             'monthlySalesData'
         ));
+    }
+
+    private function convertMonthNumberToName($monthNumber)
+    {
+        return date('F', mktime(0, 0, 0, $monthNumber, 10));
     }
 
     public function fetchTransactionsByDate(Request $request)
