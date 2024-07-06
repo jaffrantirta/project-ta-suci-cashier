@@ -26,9 +26,9 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="diff_stock">Selisih</label>
-                            <input type="number" class="form-control @error('diff_stock') is-invalid @enderror" id="diff_stock" name="diff_stock" step="0.01" value="{{ isset($opname) ? old('diff_stock') ?? $opname->diff_stock : '' }}" required>
-                            @error('diff_stock')
+                            <label for="real_stock">Stok di Gudang</label>
+                            <input type="number" class="form-control @error('real_stock') is-invalid @enderror" id="real_stock" name="real_stock" step="0.01" value="{{ isset($opname) ? old('real_stock') ?? $opname->real_stock : '' }}" required>
+                            @error('real_stock')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

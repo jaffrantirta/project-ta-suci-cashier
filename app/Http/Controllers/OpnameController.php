@@ -29,16 +29,13 @@ class OpnameController extends Controller
     public function store(OpnameStoreRequest $request)
     {
         $item = Item::where('sku', $request->input('sku'))->firstOrFail();
-        if ($request->diff_stock > $item->stocks()->latest()->first()->amount) {
-            return redirect('opname')->with('error', 'Stok opname melebihi stok pada sistem');
-        }
-        $real_stock = $item->stocks()->latest()->first()->amount - $request->diff_stock;
+        $diff_stock = $request->real_stock - $item->stock->amount;
         // return $real_stock;
         DB::beginTransaction();
-        $item->opname()->create(array_merge($request->validated(), ['real_stock' => $real_stock]));
+        $item->opname()->create(array_merge($request->validated(), ['diff_stock' => $diff_stock]));
         Stock::create([
             'item_id' => $item->id,
-            'change_amount' => -$request->diff_stock,
+            'change_amount' => $diff_stock,
             'amount' => 0,
             'supplier_name' => 'note: opname (' . $request->comment . ')'
         ]);
